@@ -66,7 +66,7 @@ const onFormSubmit = () => {
           response.json().then((data) => {
             setUserData(data);
             persistUserData();
-            router.push({name: 'home'});
+            router.push({ name: 'home' });
           });
         } else {
           authenticationFailed.value = true;
@@ -83,7 +83,7 @@ const onFormSubmit = () => {
 
 onBeforeMount(() => {
   if (isAuthenticated.value === true) {
-    router.replace({name: 'home'});
+    router.replace({ name: 'home' });
   }
 });
 </script>
