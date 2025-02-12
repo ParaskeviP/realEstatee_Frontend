@@ -22,67 +22,44 @@ onBeforeMount(() => {
 <style>
 html,
 body,
-#app {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  transition: background-color 0.5s ease;
-}
-
 body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   line-height: 1.6;
+  background: none;
   color: #333;
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 #app {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #f0f0f0; /* Light background */
+  justify-content: flex-start;
+  min-height: 1000vh;
+  padding-top: 170px;
+
+  background: linear-gradient(to bottom right, #9e7a68, #c5a48d);
+}
+
+main {
+  max-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 header {
-  background-color: #ffffff; /* Light background for header */
   color: #333333; /* Dark text color for header */
-  padding: 1rem;
   text-align: center;
-  transition: background-color 0.5s ease;
-}
-
-nav {
-  background-color: #f7f7f7; /* Light background for nav */
-  color: #333333; /* Dark text color for nav */
-  padding: 1rem;
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  transition: background-color 0.5s ease;
-}
-
-nav a {
-  text-decoration: none;
-  color: #333333; /* Dark text color for nav links */
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: #3498db; /* Blue color for hover effect */
+  transition: 0.5s ease;
 }
 
 main {
   width: 80%;
   margin: 2rem 0;
-}
-
-footer {
-  background-color: #f7f7f7; /* Light background for footer */
-  color: #333333; /* Dark text color for footer */
-  padding: 1rem;
-  text-align: center;
-  transition: background-color 0.5s ease;
 }
 </style>

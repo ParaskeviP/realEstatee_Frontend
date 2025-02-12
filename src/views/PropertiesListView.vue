@@ -1,26 +1,24 @@
 <template>
   <div>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" /> -->
-
     <div v-if="paginatedProperties.length > 0">
       <table class="table">
         <thead>
         <tr>
           <th>ID</th>
-          <th>City</th>
-          <th>Size</th>
-          <th>Price</th>
-          <th>Rooms</th>
-          <th>Beds</th>
-          <th>Baths</th>
-          <th>Pets Allowed</th>
-          <th>Garden</th>
-          <th>Balcony</th>
-          <th>Heating</th>
-          <th>Furnished</th>
-          <th>Renovation Year</th>
-          <th>Built Year</th>
-          <th>Options</th>
+          <th>Πόλη</th>
+          <th>Μέγεθος</th>
+          <th>Τιμή</th>
+          <th>Αριθμός Δωματίων</th>
+          <th>Αριθμός Υπνοδωματίων</th>
+          <th>Αριθμός WC</th>
+          <th>Επιτρέπονται τα κατοικίδια</th>
+          <th>Έχει Κήπο</th>
+          <th>Έχει Μπαλκόνια</th>
+          <th>Έχει Κεντρική Θέρμανση</th>
+          <th>Είναι Επιπλωμένο</th>
+          <th>Έτος Ανακαίνησης</th>
+          <th>Έτος Κατασκευής</th>
+          <th>Επιλογές</th>
         </tr>
         </thead>
         <tbody>
@@ -52,8 +50,8 @@
             <span v-if="property.isFurnished">✔️</span>
             <span v-else>✘</span>
           </td>
-          <td>{{ property.renovationYear }}</td>
           <td>{{ property.builtYear }}</td>
+          <td>{{ property.renovationYear }}</td>
           <button class="btn stylish-btn" @click="makeRentalRequest(property.id)">
             Make Rental Request
           </button>
@@ -380,4 +378,3 @@ th {
   border-radius: 5px;
 }
 </style>
-

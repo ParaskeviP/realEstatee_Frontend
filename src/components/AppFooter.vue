@@ -17,5 +17,3 @@
   border-top: 1px solid #ccc; /* Optional: add a border on top for separation */
 }
 </style>
-<script setup>
-</script>

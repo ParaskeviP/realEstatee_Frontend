@@ -26,7 +26,7 @@
       </div>
     </div>
     <div v-else>
-      No Users found!
+      Δεν υπάρχουν εγγεγραμμένοι χρήστες!
     </div>
     <div v-if="showModal" class="modal">
       <div class="modal-content success">
@@ -43,7 +43,7 @@ import { useApplicationStore } from '@/stores/application.js';
 
 const { loadUserData } = useApplicationStore();
 const userData = loadUserData();
-const backendURL = import.meta.env.VITE_BACKEND; // Import VITE_BACKEND variable
+const backendURL = import.meta.env.VITE_BACKEND;
 
 const users = ref([]);
 const itemsPerPage = 5;
@@ -52,7 +52,7 @@ const showModal = ref(false);
 const modalMessage = ref('');
 
 onMounted(() => {
-  fetch(`${backendURL}/api/admin/users`, {
+  fetch(`${backendURL}/api/admin/getUsersFalse`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ onMounted(() => {
 });
 
 const removeUser = (userId) => {
-  fetch(`${backendURL}/api/admin/users/${userId}/remove`, { // Use backendURL variable here
+  fetch(`${backendURL}/api/admin/users/${userId}/remove`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -128,7 +128,6 @@ const closeModal = () => {
 
 </script>
 
-
 <style>
 .pagination {
   margin-top: 10px;
@@ -138,8 +137,8 @@ const closeModal = () => {
 }
 
 .pagination-btn {
-  background-color: #ffffff; /* White background color */
-  color: #333333; /* Dark text color */
+  background-color: #ffffff;
+  color: #333333;
   padding: 8px 16px;
   cursor: pointer;
   border: none;
@@ -152,9 +151,9 @@ const closeModal = () => {
   border-collapse: collapse;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff; /* White background color */
+  background-color: #ffffff;
   border: none;
-  color: #333333; /* Dark text color */
+  color: #333333;
   border: 1px solid #000000;
 }
 
@@ -165,17 +164,17 @@ th, td {
 }
 
 th {
-  background-color: #ffffff; /* White background color */
-  color: #333333; /* Dark text color */
+  background-color: #ffffff;
+  color: #333333;
 }
 .stylish-btn {
   padding: 12px 24px !important;
   border-radius: 25px;
   text-decoration: none;
-  color: #333333; /* Dark text color */
+  color: #333333;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  background-color: #ffffff; /* White background color */
+  background-color: #ffffff;
   border: none;
   display: inline-block;
   overflow: hidden;
@@ -183,7 +182,7 @@ th {
 }
 
 .stylish-btn:hover {
-  background-color: #e0e0e0; /* Lighter background color on hover */
+  background-color: #e0e0e0;
   transform: scale(1.05);
 }
 
@@ -194,7 +193,7 @@ th {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #ffffff, #f0f0f0); /* Gradient for button */
+  background: linear-gradient(45deg, #ffffff, #f0f0f0);
   z-index: -1;
   transition: transform 0.3s ease;
   transform: scaleX(0);
@@ -214,26 +213,26 @@ th {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(255, 255, 255, 0.4); /* White background color with transparency */
+  background-color: rgba(255, 255, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .modal-content {
-  background-color: #ffffff; /* White background color */
-  color: #333333; /* Dark text color */
+  background-color: #ffffff;
+  color: #333333;
   margin: 0 auto;
   padding: 20px;
   border-radius: 5px;
-  border: 1px solid #333333; /* Dark border color */
+  border: 1px solid #333333;
   width: 60%;
   max-width: 400px;
   z-index: 1002;
 }
 
 .close {
-  color: #333333; /* Dark text color */
+  color: #333333;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -242,12 +241,11 @@ th {
 
 .close:hover,
 .close:focus {
-  color: #aaaaaa; /* Lighter text color on hover/focus */
+  color: #aaaaaa;
   text-decoration: none;
 }
 
 .success {
-  color: #333333; /* Dark text color */
+  color: #333333;
 }
 </style>
-

@@ -4,151 +4,152 @@
       <div class="modal-container">
         <div class="content">
           <div class="text-center mb-4">
-            <h1 class="fs-3">Add Property</h1>
+            <h1 class="fs-3">Προσθήκη Ακινήτου</h1>
           </div>
 
           <form @submit.prevent="onFormSubmit">
             <div class="mb-2">
-              <label for="cityFormControl" class="form-label mb-1">City</label>
+              <label for="cityFormControl" class="form-label mb-1">Πόλη</label>
               <div class="col-sm-8">
                 <input v-model="property.city" type="text" class="form-control" id="cityFormControl" pattern="[A-Za-z]+" title="Please enter only letters" required />
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="streetFormControl" class="form-label mb-1">Street</label>
+              <label for="streetFormControl" class="form-label mb-1">Οδός</label>
               <div class="col-sm-8">
                 <input v-model="property.street" type="text" class="form-control" id="streetFormControl" pattern="[A-Za-z]+" title="Please enter only letters" required />
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="streetNumFormControl" class="form-label mb-1">Street Number</label>
+              <label for="streetNumFormControl" class="form-label mb-1">Νούμερο</label>
               <div class="col-sm-4">
                 <input v-model="property.streetNum" type="number" class="form-control" id="streetNumFormControl"  min="0" title="Please enter only numbers" required />
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="priceFormControl" class="form-label mb-1">Price</label>
+              <label for="priceFormControl" class="form-label mb-1">Τιμή (σε €)</label>
               <div class="col-sm-4">
                 <input v-model="property.price" type="number" class="form-control" id="priceFormControl"  min="0" title="Please enter only numbers" required />
               </div>
             </div>
-
+            
             <div class="mb-2">
-              <label for="sizeFormControl" class="form-label mb-1">Size</label>
+              <label for="sizeFormControl" class="form-label mb-1">Μέγεθος (σε τ.μ)</label>
               <div class="col-sm-4">
                 <input v-model="property.size" type="number" class="form-control" id="sizeFormControl"  min="0" title="Please enter only numbers" required />
               </div>
             </div>
-
+            
             <div class="mb-2">
-              <label for="roomNumFormControl" class="form-label mb-1">Number of Rooms</label>
+              <label for="roomNumFormControl" class="form-label mb-1">Σύνολο Δωματίων</label>
               <div class="col-sm-4">
                 <input v-model="property.roomNum" type="number" class="form-control" id="roomNumFormControl"  min="0" title="Please enter only numbers" required />
               </div>
             </div>
-
+            
             <div class="mb-2">
-              <label for="bathNumFormControl" class="form-label mb-1">Number of Bathrooms</label>
+              <label for="bedNumFormControl" class="form-label mb-1">Εκ των οποίων κρεβατοκάμαρες</label>
+              <div class="col-sm-4">
+                <input v-model="property.bedNum" type="number" class="form-control" id="bedNumFormControl"  min="0" title="Please enter only numbers" required />
+              </div>
+
+            </div>
+            <div class="mb-2">
+              <label for="bathNumFormControl" class="form-label mb-1">Αριθμός WC</label>
               <div class="col-sm-4">
                 <input v-model="property.bathNum" type="number" class="form-control" id="bathNumFormControl"  min="0" title="Please enter only numbers" required />
               </div>
             </div>
-
+            
             <div class="mb-2">
-              <label for="bedNumFormControl" class="form-label mb-1">Number of Bedrooms</label>
-              <div class="col-sm-4">
-                <input v-model="property.bedNum" type="number" class="form-control" id="bedNumFormControl"  min="0" title="Please enter only numbers" required />
-              </div>
-            </div>
-
-            <div class="mb-2">
-              <label for="isFurnishedFormControl" class="form-label mb-1">Furnished</label>
-              <div class="col-sm-4">
-                <select v-model="property.isFurnished" class="form-select" id="isFurnishedFormControl" required>
-                  <option :value="true">Yes</option>
-                  <option :value="false">No</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mb-2">
-              <label for="hasParkingFormControl" class="form-label mb-1">Parking</label>
-              <div class="col-sm-4">
-                <select v-model="property.hasParking" class="form-select" id="hasParkingFormControl" required>
-                  <option :value="true">Yes</option>
-                  <option :value="false">No</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mb-2">
-              <label for="hasBalconyFormControl" class="form-label mb-1">Balcony</label>
-              <div class="col-sm-4">
-                <select v-model="property.hasBalcony" class="form-select" id="hasBalconyFormControl" required>
-                  <option :value="true">Yes</option>
-                  <option :value="false">No</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mb-2">
-              <label for="hasGardenFormControl" class="form-label mb-1">Garden</label>
-              <div class="col-sm-4">
-                <select v-model="property.hasGarden" class="form-select" id="hasGardenFormControl" required>
-                  <option :value="true">Yes</option>
-                  <option :value="false">No</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mb-2">
-              <label for="hasHeatingFormControl" class="form-label mb-1">Heating</label>
-              <div class="col-sm-4">
-                <select v-model="property.hasHeating" class="form-select" id="hasHeatingFormControl" required>
-                  <option :value="true">Yes</option>
-                  <option :value="false">No</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mb-2">
-              <label for="hasACFormControl" class="form-label mb-1">AC</label>
-              <div class="col-sm-4">
-                <select v-model="property.hasAC" class="form-select" id="hasACFormControl" required>
-                  <option :value="true">Yes</option>
-                  <option :value="false">No</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mb-2">
-              <label for="petsAllowedFormControl" class="form-label mb-1">Pets Allowed</label>
-              <div class="col-sm-4">
-                <select v-model="property.petsAllowed" class="form-select" id="petsAllowedFormControl" required>
-                  <option :value="true">Yes</option>
-                  <option :value="false">No</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mb-2">
-              <label for="builtYearFormControl" class="form-label mb-1">Built Year</label>
+              <label for="builtYearFormControl" class="form-label mb-1">Έτος Κατασκευής</label>
               <div class="col-sm-4">
                 <input v-model="property.builtYear" type="number" class="form-control" id="builtYearFormControl"  min="1950" max="2025" title="Please enter only numbers" required />
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="renovationYearFormControl" class="form-label mb-1">Renovation Year</label>
+              <label for="renovationYearFormControl" class="form-label mb-1">Έτος Ανακαίνησης (Αν όχι, βάλτε το ίδιο έτος)</label>
               <div class="col-sm-4">
                 <input v-model="property.renovationYear" type="number" class="form-control" id="renovationYearFormControl"  min="1950" max="2025" title="Please enter only numbers" required />
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg rounded-3 font-bold">Submit</button>
+            <div class="mb-2">
+              <label for="isFurnishedFormControl" class="form-label mb-1">Είναι Επιπλωμένο;</label>
+              <div class="col-sm-4">
+                <select v-model="property.isFurnished" class="form-select" id="isFurnishedFormControl" required>
+                  <option :value="true">Ναι</option>
+                  <option :value="false">Όχι</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="mb-2">
+              <label for="hasParkingFormControl" class="form-label mb-1">Έχει χώρο για Πάρκινγκ;</label>
+              <div class="col-sm-4">
+                <select v-model="property.hasParking" class="form-select" id="hasParkingFormControl" required>
+                  <option :value="true">Ναι</option>
+                  <option :value="false">Όχι</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label for="hasBalconyFormControl" class="form-label mb-1">Έχει μπαλκόνια;</label>
+              <div class="col-sm-4">
+                <select v-model="property.hasBalcony" class="form-select" id="hasBalconyFormControl" required>
+                  <option :value="true">Ναι</option>
+                  <option :value="false">Όχι</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label for="hasGardenFormControl" class="form-label mb-1">Έχει κήπο;</label>
+              <div class="col-sm-4">
+                <select v-model="property.hasGarden" class="form-select" id="hasGardenFormControl" required>
+                  <option :value="true">Ναι</option>
+                  <option :value="false">Όχι</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label for="hasHeatingFormControl" class="form-label mb-1">Έχει κεντρική θέρμανση;</label>
+              <div class="col-sm-4">
+                <select v-model="property.hasHeating" class="form-select" id="hasHeatingFormControl" required>
+                  <option :value="true">Ναι</option>
+                  <option :value="false">Όχι</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label for="hasACFormControl" class="form-label mb-1">Ψύξη;</label>
+              <div class="col-sm-4">
+                <select v-model="property.hasAC" class="form-select" id="hasACFormControl" required>
+                  <option :value="true">Ναι</option>
+                  <option :value="false">Όχι</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label for="petsAllowedFormControl" class="form-label mb-1">Επιτρέπονται τα κατοικίδια;</label>
+              <div class="col-sm-4">
+                <select v-model="property.petsAllowed" class="form-select" id="petsAllowedFormControl" required>
+                  <option :value="true">Ναι</option>
+                  <option :value="false">Όχι</option>
+                </select>
+              </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary btn-lg rounded-3 font-bold">Βρες μου αγοραστή!</button>
           </form>
 
           <div v-if="showModal" class="modal">
@@ -211,10 +212,10 @@ const onFormSubmit = () => {
   })
       .then((response) => {
         if (response.ok) {
-          openModal('Property saved successfully!'); //if response is ok display saved
+          openModal('Η Αγγελία σας είναι έτοιμη!'); //if response is ok display saved
           clearForm();
         } else {
-          openModal('Failed to save property.');//response not ok show failed message
+          openModal('Η Αγγελία σας δεν μπόρεσε να αποθηκευτεί.');//response not ok show failed message
         }
       })
       .catch((error) => {
@@ -247,8 +248,19 @@ const clearForm = () => {
 </script>
 
 <style scoped>
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: center;
+  background-color: #f4f4f4;
+  font-family: 'Roboto', sans-serif;
+}
+
 .modal {
-  display: none;
+  display: none; 
   position: fixed;
   z-index: 1001;
   left: 0;
@@ -263,94 +275,80 @@ const clearForm = () => {
 }
 
 .modal-content {
-  background-color: #333332;
+  background-color: #80535A;
   color: #fff;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid #fff;
-  width: 60%;
-  max-width: 400px;
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 1002;
+  margin: auto;
+}
+
+.modal-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .close {
   color: #fff;
-  float: right;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+  transition: color 0.3s;
 }
 
 .close:hover,
 .close:focus {
-  color: #aaa;
-  text-decoration: none;
-}
-
-.success {
-  color: #b9bdb9;
-}
-body, html {
-  margin: 0;
-}
-.modal-container {
-  width: 150%;
-  max-width: 1000px;
-  margin: 0 auto;
-  align-items: center;
-
-}
-
-.content {
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #2d2c2c;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-
-}
-.overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  background-color: transparent;
+  color: #3498db;
 }
 
 .form-container {
-  height: 100%;
   width: 100%;
-  max-width: 500px;
-  text-align: center;
-}
-
-.mb-2 {
-  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
+  background-color: #80535A;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
 }
 
 .form-control {
-  width: 100%;
-  padding: 2px;
+  width: 95%;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  outline: none;
 }
 
 .btn {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   font-size: 16px;
   border-radius: 8px;
-  background: linear-gradient(to right, #646665, #2e3030, #2a2828);
+  background: #a86f72;
   color: #ffffff;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s;
   border: none;
   outline: none;
   margin-top: 20px;
 }
 
 .btn:hover {
-  box-shadow: 0 0 10px rgba(80, 173, 240, 0.5);
+  background: #df585e;
+  box-shadow: 0 0 12px #df585e;
 }
 
 .popup {
@@ -358,10 +356,10 @@ body, html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 10px;
+  padding: 15px;
   border-radius: 8px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 1000;
 }
 
@@ -376,9 +374,28 @@ body, html {
 }
 
 .icon {
-  margin-right: 5px;
+  margin-right: 8px;
 }
+
 .white-text {
   color: #fff;
 }
+
+@media (max-width: 768px) {
+  .form-container {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .form-control {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
 </style>

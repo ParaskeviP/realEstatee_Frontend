@@ -1,6 +1,6 @@
 <template>
   <div class="request-list-view white-text">
-    <div v-if="requests && requests.length > 0">
+    <div v-if="paginatedRequests.length>0">
       <table class="table">
         <thead>
         <tr>

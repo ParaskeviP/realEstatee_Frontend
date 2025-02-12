@@ -1,10 +1,6 @@
 HTML
 <template>
-  <div>
-    <h1 class="zoomInUp white-text">RealEstateApp</h1>
-    <p class="zoomInUp white-text" ref="textElement">
-    </p>
-  </div>
+
 </template>
 
 <script> //Make the paragraph a typeOut
@@ -18,7 +14,8 @@ console.log(localStorage.getItem('userData'));
 
 .dark-text {
   text-align: center;
-  color: #333; /* Dark text color */
+  color: #333;
+  display: none;
 }
 
 @keyframes zoomInUp {
@@ -32,5 +29,3 @@ console.log(localStorage.getItem('userData'));
   }
 }
 </style>
-
-  
