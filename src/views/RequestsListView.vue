@@ -15,11 +15,9 @@
         <tr v-for="request in paginatedRequests" :key="request.id">
           <td>{{ request.tenant.id }}</td>
           <td>{{ request.property.id }}</td>
-          <td>{{ request.isRentalRequest ? "Rental Request" : "Viewing Request" }}</td>
+          <td>{{ request.isRentalRequest ? "Ενοικίαση" : "Επίδειξη" }}</td>
           <td>
-      <span v-if="!request.isRentalRequest">
-        {{ request.isViewingApproved === null ? "No Status" : request.isViewingApproved ? "Approved" : "Declined" }}
-      </span>
+            {{ request.isViewingApproved === null ? "Εκκρεμεί" : request.isViewingApproved ? "Δεκτό" : "Απερρίφθη" }}
           </td>
 
           <td>
@@ -159,7 +157,7 @@ const approveViewingRequest = (requestId) => {
 
 
 const approveRentalRequest = (requestId) => {
-  fetch(`http://localhost:8080/api/owner/approveRentalRequest/${requestid}`, {
+  fetch(`http://localhost:8080/api/owner/approveRentalRequest/${requestId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

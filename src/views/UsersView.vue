@@ -73,8 +73,8 @@ onMounted(() => {
 });
 
 const removeUser = (userId) => {
-  fetch(`http://localhost:8080/api/admin/users/${userId}/remove`, {
-    method: 'POST',
+  fetch(`http://localhost:8080/api/admin/declineUser/${userId}`, {
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${userData.token}`,

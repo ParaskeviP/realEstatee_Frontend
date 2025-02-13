@@ -2,7 +2,6 @@
   <div class="overlay dark-text">
     <div class="modal-container">
       <div class="modal-content">
-        <span class="close" @click="closeModal">&times;</span>
         <div class="text-center mb-4">
           <h1 class="fs-3">Είσοδος</h1>
         </div>

@@ -61,6 +61,30 @@ const router = createRouter({
             path: '/register',
             name: 'register',
             component: () => import('../views/RegistrationView.vue')
+        },
+        {
+            path: '/applicationManagement',
+            name: 'application-management', 
+            component: () => import('../views/ApplicationManagementView.vue'),
+            meta: { requiresAuth: true }
+        },
+        {
+            path: '/notifications',
+            name: 'notifications',
+            component: () => import('../views/MyApplicationsView.vue'),
+            meta: { requiresAuth:true }
+        },
+        {
+            path: '/profile',
+            name: 'profile',
+            component: () => import('../views/MyProfileView.vue'),
+            meta: { requiresAuth:true }
+        },
+        {
+            path: '/oprofile',
+            name: 'owner_profile',
+            component: () => import('../views/MyOwnerProfileView.vue'),
+            meta: { requiresAuth:true }
         }
     ]
 });

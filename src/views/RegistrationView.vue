@@ -2,7 +2,6 @@
   <div class="overlay white-text" ref="overlay" @click.self="closeModal">
     <div class="modal-container">
       <div class="modal-content">
-        <span class="close" @click="closeModal">&times;</span>
         <div class="text-center mb-4">
           <h3 class="display-4 text-dark font-bold">Εγγραφείτε</h3>
         </div>
@@ -113,7 +112,6 @@ const onFormSubmit = () => {
 };
 
 const togglerOwnerFields = () => {
-  //Reset owner-specific fields when switching roles
   if (user.value.role !== 'ROLE_OWNER') {
     user.value.phoneNumber = '';
   }
