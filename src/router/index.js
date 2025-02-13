@@ -42,7 +42,7 @@ const router = createRouter({
         },
         {
             path: '/showProperties',
-            name: 'properties-list',
+            name: 'showProperties',
             component: () => import('../views/PropertiesListView.vue'),
             meta: { requiresAuth: true }
         },

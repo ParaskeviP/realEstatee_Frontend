@@ -4,11 +4,11 @@
       <table class="table">
         <thead>
         <tr>
-          <th>Tenant ID</th>
-          <th>Property ID</th>
-          <th>Type of Request</th>
-          <th>Status</th>
-          <th>Options</th>
+          <th>ID Ενοικιαστή</th>
+          <th>ID Ακινήτου</th>
+          <th>Κατηγορία Αιτήματος</th>
+          <th>Κατάσταση</th>
+          <th>Επιλογές</th>
         </tr>
         </thead>
         <tbody>
@@ -25,11 +25,11 @@
           <td>
             <!-- Show buttons only if the request is a rental request or if the status is null for viewing requests -->
             <button v-if=" (request.isViewingApproved ===null && !request.isViewingApproved === true && !request.isViewingApproved === false) || request.isRentalRequest ||( !request.isRentalRequest && request.isViewingApproved === null)" class="btn stylish-btn" @click="approveRequest(request.id, request.isRentalRequest)">
-              Approve Request
+              Έγκριση
             </button>
 
             <button v-if=" (request.isViewingApproved ===null && !request.isViewingApproved === true && !request.isViewingApproved === false) || request.isRentalRequest ||( !request.isRentalRequest && request.isViewingApproved === null)" class="btn stylish-btn" @click="declineRequest(request.id)">
-              Decline Request
+              Απόρριψη
             </button>
           </td>
         </tr>
@@ -37,9 +37,9 @@
       </table>
 
       <div class="pagination white-text"> <!-- buttons for previous and next pages in the table -->
-        <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
-        Page {{ currentPage }} of {{ totalPages }}
-        <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+        <button @click="prevPage" :disabled="currentPage === 1"><=</button>
+        Σελίδα {{ currentPage }}/{{ totalPages }}
+        <button @click="nextPage" :disabled="currentPage === totalPages">=></button>
       </div>
     </div>
     <div v-else-if="hasSearched">
@@ -203,7 +203,6 @@ const declineRequest = (requestId) => {
 
 
 <style scoped>
-/*  */
 .pagination {
   margin-top: 10px;
   display: flex;
@@ -219,6 +218,37 @@ const declineRequest = (requestId) => {
   border: none;
 }
 
+table th,
+table td {
+  transition: all 0.7s ease-in-out;
+}
+
+table {
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: auto;
+}
+
+th {
+  background-color: #535A80;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f157;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
 .request-list-view {
   display: flex;
   align-items: center;
@@ -226,27 +256,6 @@ const declineRequest = (requestId) => {
   height: 100%;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #f0f0f0; /* Light gray */
-  border: none;
-  border: 1px solid #ddd; /* Light gray border */
-  margin-top: 10px;
-}
-
-th, td {
-  padding: 12px;
-  text-align: left;
-  border: 1px solid #ddd; /* Light gray border */
-}
-
-th {
-  background-color: #3498db; /* Blue */
-  color: #fff; /* White */
-}
 .modal {
   display: none;
   position: fixed;
@@ -263,15 +272,29 @@ th {
 }
 
 .modal-content {
-  background-color: #f0f0f0; /* Light gray */
-  color: #333; /* Dark gray */
+  background-color: #f0f0f0;
+  color: #333;
   margin: 0 auto;
   padding: 20px;
   border-radius: 5px;
-  border: 1px solid #333; /* Dark gray border */
+  border: 1px solid #333;
   width: 60%;
   max-width: 400px;
   z-index: 1002;
+}
+
+button {
+  margin-top: 10px;
+  background: #535A80;
+  color: white;
+  font-size: 16px;
+  padding: 13px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
 }
 
 .close {
@@ -291,60 +314,7 @@ th {
 .success {
   color: #2ecc71; /* Green */
 }
-.btn {
-  margin-right: 5px;
-  padding: 10px 20px !important;
-  border-radius: 5px;
-  text-decoration: none;
-  color: #fff; /* White */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  background-color: #3498db; /* Blue */
-  border: none;
-  display: inline-block;
-}
 
-.btn:hover {
-  background-color: #2980b9; /* Darker blue on hover */
-}
-
-.stylish-btn {
-  padding: 12px 24px !important;
-  border-radius: 25px;
-  text-decoration: none;
-  color: #fff; /* White */
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  background-color: #3498db; /* Blue */
-  border: none;
-  display: inline-block;
-  overflow: hidden;
-  position: relative;
-}
-
-.stylish-btn:hover {
-  background-color: #2980b9; /* Darker blue on hover */
-  transform: scale(1.05);
-}
-
-.stylish-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, #3498db, #2980b9); /* Gradient blue */
-  z-index: -1;
-  transition: transform 0.3s ease;
-  transform: scaleX(0);
-  transform-origin: right;
-}
-
-.stylish-btn:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
-}
 
 h3 {
   margin-top: 20px;
@@ -353,6 +323,17 @@ h3 {
 
 .white-text {
   color: #333; /* Dark gray */
+}
+
+button:hover {
+  background: linear-gradient(45deg, #535A80, #003f7f);
+  transform: translateY(-3px); 
+  box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 86, 179, 0.4);
 }
 </style>
 

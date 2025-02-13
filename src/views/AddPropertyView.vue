@@ -1,11 +1,11 @@
 <template>
+  <div class="text-center mb-4">
+    <h1 class="fs-3">Προσθήκη Ακινήτου</h1>
+  </div>
   <div class="overlay white-text box">
     <div class="form-container">
       <div class="modal-container">
         <div class="content">
-          <div class="text-center mb-4">
-            <h1 class="fs-3">Προσθήκη Ακινήτου</h1>
-          </div>
 
           <form @submit.prevent="onFormSubmit">
             <div class="mb-2">

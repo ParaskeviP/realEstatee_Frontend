@@ -136,7 +136,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup>
@@ -181,7 +180,6 @@ const fetchProperties = () => {
       .then(data => {
         properties.value = data;
         hasSearched.value = true; // Σηματοδοτούμε ότι έγινε αναζήτηση
-
       })
       .catch(error => console.error('Error fetching properties:', error));
 
@@ -268,7 +266,6 @@ async function searchProperties() {
           headers: {
             "Content-Type": "application/json",
             'Authorization': `Bearer ${userData.token}`,},
-
         }
     );
     if (!response.ok) {
@@ -312,13 +309,6 @@ async function searchProperties() {
   font-weight: bold;
   display: block;
   margin-top: 10px;
-}
-
-.property-search {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 10px;
 }
 
 .property-search {

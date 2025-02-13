@@ -1,33 +1,34 @@
 <template>
-    <div class="header-box" :class="{ 'is-homepage': isHomePage }">
-      <div class="zoomInUp">
-        <a href="/home">
-          <img src="/src/assets/logo.png" alt="Home" class="nav-icon">
-        </a>  
-      <ul class="navbar-nav">
-        <li v-if="hasRole('OWNER')">
-          <a href="/newProperty" class="nav-link btn">Add Property</a>
-        </li>
-        <li v-if="hasRole('OWNER')">
-          <a href="/getRequests" class="nav-link btn">Show Requests</a>
-        </li>
-        <li v-if="hasRole('TENANT')">
-          <a href="/showProperties" class="nav-link btn">See all Properties</a>
-        </li>
-        <li v-if="hasRole('TENANT')">
-          <a href="/searchProperties" class="nav-link btn">Search Properties</a>
-        </li>
-        <li v-if="hasRole('ADMIN')">
-          <a href="/users" class="nav-link btn">Users</a>
-        </li>
-        <li v-if="isAuthenticated">
-          <a href="#" @click.prevent="handleLogout" class="nav-link btn logout-btn">Log Out</a>
-        </li>
-        <li v-if="!isAuthenticated">
-          <a href="/login" class="nav-link btn login-btn">Login</a>
-        </li>
-      </ul>
-    </div>
+  <div class="zoomInUp">
+    <ul class="navbar-nav">
+      <a href="/home">
+        <img src="/src/assets/logo.png" alt="Home" class="nav-icon">
+      </a> 
+      <li>
+        <a href="/home" class="nav-link btn">Αρχική</a>
+      </li>
+      <li v-if="hasRole('OWNER')">
+        <a href="/newProperty" class="nav-link btn">Προσθήκη Ακινήτου</a>
+      </li>
+      <li v-if="hasRole('OWNER')">
+        <a href="/getRequests" class="nav-link btn">Προβολή Αιτήσεων</a>
+      </li>
+      <li v-if="hasRole('TENANT')">
+        <a href="/showProperties" class="nav-link btn">Προβολή Ακινήτων</a>
+      </li>
+      <li v-if="hasRole('TENANT')">
+        <a href="/searchProperties" class="nav-link btn">Αναζήτηση Ακινήτων</a>
+      </li>
+      <li v-if="hasRole('ADMIN')">
+        <a href="/users" class="nav-link btn">Users</a>
+      </li>
+      <li v-if="isAuthenticated">
+        <a href="#" @click.prevent="handleLogout" class="nav-link btn logout-btn">Έξοδος</a>
+      </li>
+      <li v-if="!isAuthenticated">
+        <a href="/login" class="nav-link btn login-btn">Είσοδος</a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -59,19 +60,23 @@ router.beforeEach((to, from, next) => {
 .navbar-nav {
   list-style: none;
   padding: 0;
+  margin: 0;
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 2px;
   flex-wrap: wrap;
+  background: linear-gradient(to right, #9e7a68, #7b5e49, #4e3b32);
+  border-radius: 8px;
 }
 
 .btn {
   text-decoration: none;
-  padding: 10px 20px;
+  padding: 40px 20px;
+  margin: 0;
   font-size: 16px;
   font-weight: bold;
   color: white;
-  background: linear-gradient(to right, #646665, #2e3030, #2a2828);
+  background: linear-gradient(to right, #4e6e8e, #3c4f5d, #2a2f3a);
   border-radius: 8px;
   transition: all 0.3s ease;
   display: inline-block;
@@ -82,15 +87,18 @@ router.beforeEach((to, from, next) => {
 
 .zoomInUp {
   animation: zoomInUp 1s ease forwards;
-  align-items: center;
+  margin: 0;
+}
+
+.header-box {
+  margin: 0;
 }
 
 .btn:hover {
-  background: linear-gradient(to right, #4e5050, #343737, #2a2828);
+  background: linear-gradient(to right, #5e7d95, #4d6575, #3c4b56);
   box-shadow: 0 0 12px rgba(80, 173, 240, 0.5);
 }
 
-/* Different colors for Logout and Login buttons */
 .logout-btn {
   background: linear-gradient(to right, #ff4b4b, #d32f2f);
 }
@@ -108,7 +116,9 @@ router.beforeEach((to, from, next) => {
 }
 
 img {
-  align-content: center;
+  width: 20%;
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width: 768px) {

@@ -4,6 +4,7 @@ import { RouterView } from 'vue-router';
 import { useApplicationStore } from '@/stores/application.js';
 import AppHeader from '@/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
+import PropertiesListView from './views/PropertiesListView.vue';
 
 const { loadUserData } = useApplicationStore();
 
@@ -13,49 +14,59 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div id="app">
+  <div id="app" :class="{ home: $route.path === '/' }">
     <AppHeader />
-    <RouterView />
+    <main class="content">
+      <RouterView />
+    </main>
+    <AppFooter />
   </div>
 </template>
 
 <style>
-html,
-body,
-body {
+html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   line-height: 1.6;
   background: none;
   color: #333;
 }
 
-html, body, #app {
+
+.content {
+  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-x: hidden;
+  flex: 1;
+  box-sizing: border-box;
 }
 
 #app {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-height: 1000vh;
-  padding-top: 170px;
-
-  background: linear-gradient(to bottom right, #9e7a68, #c5a48d);
+  min-height: 100vh;
+  margin: 0;
+  padding-top: 100px;
+  
+  background-attachment: fixed;
+  background-size: cover;
+  background: linear-gradient(to bottom, #909094, #dadadb);
 }
 
-main {
-  max-width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
+.home header {
+  padding-top:100px;
 }
 
-header {
-  color: #333333; /* Dark text color for header */
-  text-align: center;
-  transition: 0.5s ease;
+footer {
+  margin-top: auto;
+  width: 100%;
+  padding: 0px 0;
 }
 
 main {

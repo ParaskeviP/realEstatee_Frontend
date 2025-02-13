@@ -2,12 +2,13 @@
   <div class="overlay dark-text">
     <div class="modal-container">
       <div class="modal-content">
+        <span class="close" @click="closeModal">&times;</span>
         <div class="text-center mb-4">
           <h1 class="fs-3">Είσοδος</h1>
         </div>
         <div class="mb-2" v-if="authenticationFailed">
           <div class="alert alert-danger" role="alert">
-            Authentication failed!
+            Αποτυχία Αυθεντικοποιήσης
           </div>
         </div>
         <div class="mb-2">
@@ -85,6 +86,13 @@ onBeforeMount(() => {
     router.replace({name: 'home'});
   }
 });
+
+const closeModal = () => {
+  showModal.value = false;
+  setTimeout(() => {
+    location.reload();
+  }, 500);
+};
 </script>
 
 <style scoped>
@@ -94,14 +102,13 @@ onBeforeMount(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Make sure it's on top of other content */
+  z-index: 1000;
 }
 
-/* Styling the Modal Container */
 .modal-container {
   background-color: #9E6871;
   padding: 2rem;
@@ -112,7 +119,6 @@ onBeforeMount(() => {
   text-align: center;
 }
 
-/* Heading and text */
 h1 {
   font-size: 2rem;
   font-weight: bold;
@@ -120,7 +126,6 @@ h1 {
   margin-bottom: 1rem;
 }
 
-/* Form Elements Styling */
 label {
   font-size: 1rem;
   color: #333;
@@ -139,14 +144,13 @@ input.form-control {
 }
 
 input.form-control:focus {
-  border-color: #a86f72; /* Focus color */
+  border-color: #a86f72;
   outline: none;
   box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
-/* Button Styling */
 button.btn {
-  background-color: #80535A; /* Button background color */
+  background-color: #80535A;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -158,10 +162,9 @@ button.btn {
 }
 
 button.btn:hover {
-  background-color: #a86f72; /* Darker button on hover */
+  background-color: #a86f72;
 }
 
-/* Link Styling */
 a {
   color: #3498db;
   text-decoration: none;
@@ -171,14 +174,12 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Error Alert Box Styling */
 .alert.alert-danger {
-  background-color: #e74c3c; /* Red background for alert */
+  background-color: #e74c3c;
   color: white;
   padding: 1rem;
   border-radius: 5px;
   margin-bottom: 1rem;
   font-size: 1rem;
 }
-
 </style>
