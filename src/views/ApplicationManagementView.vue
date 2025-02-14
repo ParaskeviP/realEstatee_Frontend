@@ -5,7 +5,8 @@
       <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
+            <th>ID Ιδιοκτήτη</th>
+            <th>ID Ακινήτου</th>
             <th>Πόλη</th>
             <th>Οδός</th>
             <th>Νούμερο</th>
@@ -19,17 +20,19 @@
         </thead>
         <tbody>
         <tr v-for="property in paginatedProperties" :key="property.id">
-            <td>{{ property.id }}</td>
-              <td>{{ property.city }}</td>
-              <td>{{ property.street }}</td>
-              <td>{{ property.streetNum }}</td>
-              <td>{{ property.size }}</td>
-              <td>{{ property.price }}</td>
-              <td>{{ property.roomNum }}</td>
-              <td>{{ property.bedNum }}</td>
-              <td>{{ property.bathNum }}</td>
+          <td>{{ property.owner.id }}</td>
+          <td>{{ property.id }}</td>
+          <td>{{ property.city }}</td>
+          <td>{{ property.street }}</td>
+          <td>{{ property.streetNum }}</td>
+          <td>{{ property.size }}</td>
+          <td>{{ property.price }}</td>
+          <td>{{ property.roomNum }}</td>
+          <td>{{ property.bedNum }}</td>
+          <td>{{ property.bathNum }}</td>
           <td v-if="property.id">
-            <button class="btn stylish-btn" @click="removeProperty(property.id)">Απόρριψη Εγγραφής</button>
+            <button class="btn stylish-btn" @click="removeProperty(property.id)">Απόρριψη</button>
+            <button class="btn stylish-btn" @click="approveProperty(property.id)">Επικύρωση</button>
           </td>
         </tr>
         </tbody>
@@ -90,6 +93,27 @@ onMounted(() => {
 
 const removeProperty = (propertyId) => {
   fetch(`http://localhost:8080/api/admin/deleteProperty/${propertyId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${userData.token}`,
+    }
+  })
+      .then(response => {
+        if (response.ok) {
+          openModal('Απερρίφθη Επιτυχώς!');
+        } else {
+          throw new Error('Αποτυχία απόρρηψης.');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Η απόρριψη δεν επετεύχθει:', error);
+      });
+};
+
+const approveProperty = (propertyId) => {
+  fetch(`http://localhost:8080/api/admin/approveProperty/${propertyId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -98,14 +122,14 @@ const removeProperty = (propertyId) => {
   })
       .then(response => {
         if (response.ok) {
-          openModal('Removed successfully!');
+          openModal('Επιτυχία!');
         } else {
-          throw new Error('Failed to remove');
+          throw new Error('Αποτύχια Έγκρισης.');
         }
         return response.json();
       })
       .catch(error => {
-        console.error('Error removing:', error);
+        console.error('Η έγκριση δεν επετεύχθει:', error);
       });
 };
 

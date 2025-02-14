@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Εκκρεμείς Εγγραφές</h1>
     <div v-if="paginatedUsers.length > 0">
       <table class="table">
         <thead>
@@ -14,7 +15,8 @@
           <td>{{ user.username }}</td>
           <td>{{ user.email }}</td>
           <td v-if="user.id">
-            <button class="btn stylish-btn" @click="removeUser(user.id)">Απόρριψη Εγγραφής</button>
+            <button class="btn stylish-btn" @click="declineUser(user.id)">Απόρριψη Εγγραφής</button>
+            <button class="btn stylish-btn" @click="approveUser(user.id)">Επικύρωση Εγγραφής</button>
           </td>
         </tr>
         </tbody>
@@ -26,7 +28,7 @@
       </div>
     </div>
     <div v-else>
-      Δεν υπάρχουν εγγεγραμμένοι χρήστες!
+      Δεν υπάρχουν εκκρεμείς αιτήσεις!
     </div>
     <div v-if="showModal" class="modal">
       <div class="modal-content success">
@@ -72,7 +74,7 @@ onMounted(() => {
       });
 });
 
-const removeUser = (userId) => {
+const declineUser = (userId) => {
   fetch(`http://localhost:8080/api/admin/declineUser/${userId}`, {
     method: 'DELETE',
     headers: {
@@ -90,6 +92,27 @@ const removeUser = (userId) => {
       })
       .catch(error => {
         console.error('Error removing user:', error);
+      });
+};
+
+const approveUser = (userId) => {
+  fetch(`http://localhost:8080/api/admin/approveUser/${userId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${userData.token}`,
+    }
+  })
+      .then(response => {
+        if (response.ok) {
+          openModal('Ενεκρίθη!');
+        } else {
+          throw new Error('Αποτυχία Έγκρισης.');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Ο χρήστης δεν απερρίφθη:', error);
       });
 };
 
@@ -254,5 +277,13 @@ button:active {
 
 .success {
   color: #333333;
+}
+
+h1 {
+  font-size: 4rem;
+  text-align: center;
+  color: #373b55;
+  text-shadow: 2px 2px 6px rgba(55, 59, 85, 0.5), -2px -2px 6px rgba(255, 255, 255, 0.2);
+  margin: 20px 0;
 }
 </style>
