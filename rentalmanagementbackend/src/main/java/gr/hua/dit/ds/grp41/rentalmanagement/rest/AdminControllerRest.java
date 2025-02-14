@@ -1,12 +1,7 @@
 package gr.hua.dit.ds.grp41.rentalmanagement.rest;
 
-import gr.hua.dit.ds.grp41.rentalmanagement.entities.Property;
-import gr.hua.dit.ds.grp41.rentalmanagement.entities.Request;
-import gr.hua.dit.ds.grp41.rentalmanagement.entities.Tenant;
-import gr.hua.dit.ds.grp41.rentalmanagement.entities.User;
-import gr.hua.dit.ds.grp41.rentalmanagement.services.PropertyService;
-import gr.hua.dit.ds.grp41.rentalmanagement.services.RequestService;
-import gr.hua.dit.ds.grp41.rentalmanagement.services.UserService;
+import gr.hua.dit.ds.grp41.rentalmanagement.entities.*;
+import gr.hua.dit.ds.grp41.rentalmanagement.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +22,10 @@ public class AdminControllerRest {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private OwnerService ownerService;
+    @Autowired
+    private TenantService tenantService;
 
 
     @GetMapping("/getUsersFalse")
@@ -84,12 +83,18 @@ public class AdminControllerRest {
         userService.saveUser(user);
         return ResponseEntity.ok("OK");
     }
+
     @DeleteMapping("/declineUser/{userid}")
     public ResponseEntity<String> declineUser(@PathVariable Long userid) {
         User user = userService.getById(userid);
         if (userid == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("User with ID: " + user + "does not exist.");
+        }
+        if(user.getRoles().contains("ROLE_OWNER")) {
+            ownerService.deleteOwner(userid.intValue());
+        } else if (user.getRoles().contains("ROLE_TENANT")) {
+            tenantService.deleteTenant(userid.intValue());
         }
         userService.deleteUser(userid);
         return ResponseEntity.ok("OK");

@@ -38,4 +38,8 @@ public class TenantService {
         return tenantRepo.getTenantByUser(user);
     }
 
+    @Transactional
+    public void deleteTenant(Integer id){
+        tenantRepo.deleteById(id);
+    }
 }
