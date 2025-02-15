@@ -1,4 +1,5 @@
 <template>
+  <h1>Εκκρεμούσες Αιτήσεις</h1>
   <div class="request-list-view white-text">
     <div v-if="paginatedRequests.length>0">
       <table class="table">
@@ -332,6 +333,14 @@ button:hover {
 button:active {
   transform: translateY(1px);
   box-shadow: 0 2px 4px rgba(0, 86, 179, 0.4);
+}
+
+h1 {
+  font-size: 4rem;
+  text-align: center;
+  color: #373b55;
+  text-shadow: 2px 2px 6px rgba(55, 59, 85, 0.5), -2px -2px 6px rgba(255, 255, 255, 0.2);
+  margin: 20px 0;
 }
 </style>
 
