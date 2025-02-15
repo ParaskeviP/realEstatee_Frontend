@@ -29,7 +29,7 @@ const router = createRouter({
             meta: { requiresAuth: true }
         },
         {
-            path: '/searchProperties',
+            path: '/search',
             name: 'properties-search',
             component: () => import('../views/SearchProperties.vue'),
             meta: { requiresAuth: true}
@@ -38,12 +38,6 @@ const router = createRouter({
             path: '/users',
             name: 'users',
             component: () => import('../views/UsersView.vue'),
-            meta: { requiresAuth: true }
-        },
-        {
-            path: '/showProperties',
-            name: 'showProperties',
-            component: () => import('../views/PropertiesListView.vue'),
             meta: { requiresAuth: true }
         },
         {

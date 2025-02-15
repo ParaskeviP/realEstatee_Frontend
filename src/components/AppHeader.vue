@@ -17,10 +17,7 @@
         <a href="/oprofile" class="nav-link btn">👨🏻‍💼</a>
       </li>
       <li v-if="hasRole('TENANT')">
-        <a href="/showProperties" class="nav-link btn">Προβολή Ακινήτων</a>
-      </li>
-      <li v-if="hasRole('TENANT')">
-        <a href="/searchProperties" class="nav-link btn">Αναζήτηση Ακινήτων</a>
+        <a href="/search" class="nav-link btn">Αναζήτηση Ακινήτων</a>
       </li>
       <li v-if="hasRole('TENANT')">
         <a href="/notifications" class="nav-link btn">📧</a>
