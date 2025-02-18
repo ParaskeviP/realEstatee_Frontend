@@ -10,5 +10,37 @@ import java.util.List;
 
 @Repository
 public interface PropertyRepo extends JpaRepository<Property, Integer>, JpaSpecificationExecutor<Property> {
+
+    List<Property> findByRoomNum(Integer roomNum);
+
+    List<Property> findByBedNum(Integer bedNum);
+
+    List<Property> findByBathNum(Integer bathNum);
+
+    List<Property> findByCity(String city);
+
+    List<Property> findByStreet(String street);
+
+    List<Property> findBySize(Integer size);
+
+    List<Property> findByPrice(Long price);
+
+    List<Property> findByPetsAllowed(Boolean petsAllowed);
+
+    List<Property> findByHasGarden(Boolean hasGarden);
+
+    List<Property> findByHasBalcony(Boolean hasBalcony);
+
+    List<Property> findByHasHeating(Boolean hasHeating);
+
+    List<Property> findByHasAC(Boolean hasAC);
+
+
+    List<Property> findByIsFurnished(Boolean isFurnished);
+
+    List<Property> findByRenovationYear(Integer renovationYear);
+
+    List<Property> findByBuiltYear(Integer builtYear);
+
     List<Property> getPropertiesByTenant(Tenant tenant);
 }
