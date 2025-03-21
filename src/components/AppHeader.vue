@@ -5,37 +5,37 @@
         <img src="/src/assets/logo.png" alt="Home" class="nav-icon">
       </a> 
       <li>
-        <a href="/home" class="nav-link btn">Αρχική</a>
+        <a href="/home" class="nav-link btn">Home</a>
       </li>
       <li v-if="hasRole('OWNER')">
-        <a href="/newProperty" class="nav-link btn">Προσθήκη Ακινήτου</a>
+        <a href="/newProperty" class="nav-link btn">Insert Property</a>
       </li>
       <li v-if="hasRole('OWNER')">
-        <a href="/getRequests" class="nav-link btn">Προβολή Αιτήσεων</a>
+        <a href="/getRequests" class="nav-link btn">Pending Requests</a>
       </li>
       <li v-if="hasRole('OWNER')">
-        <a href="/oprofile" class="nav-link btn">👨🏻‍💼</a>
+        <a href="/oprofile" class="nav-link btn">My Profile</a>
       </li>
       <li v-if="hasRole('TENANT')">
-        <a href="/search" class="nav-link btn">Αναζήτηση Ακινήτων</a>
+        <a href="/search" class="nav-link btn">Search Property</a>
       </li>
       <li v-if="hasRole('TENANT')">
-        <a href="/notifications" class="nav-link btn">📧</a>
+        <a href="/notifications" class="nav-link btn">My Applications</a>
       </li>
       <li v-if="hasRole('TENANT')">
-        <a href="/profile" class="nav-link btn">👤</a>
+        <a href="/profile" class="nav-link btn">My Profile</a>
       </li>
       <li v-if="hasRole('ADMIN')">
-        <a href="/users" class="nav-link btn">Χρήστες</a>
+        <a href="/users" class="nav-link btn">Pending Users</a>
       </li>
       <li v-if="hasRole('ADMIN')">
-        <a href="/applicationManagement" class="nav-link btn">Ακίνητα & Αιτήσεις</a>
+        <a href="/applicationManagement" class="nav-link btn">Properties & Requests</a>
       </li>
       <li v-if="isAuthenticated">
-        <a href="#" @click.prevent="handleLogout" class="nav-link btn logout-btn">Έξοδος</a>
+        <a href="#" @click.prevent="handleLogout" class="nav-link btn logout-btn">Sign Out</a>
       </li>
       <li v-if="!isAuthenticated">
-        <a href="/login" class="nav-link btn login-btn">Είσοδος</a>
+        <a href="/login" class="nav-link btn login-btn">Sign In</a>
       </li>
     </ul>
   </div>
@@ -68,14 +68,20 @@ router.beforeEach((to, from, next) => {
 <style scoped>
 .navbar-nav {
   list-style: none;
-  padding: 0;
+  padding: 10px 0;
   margin: 0;
   display: flex;
   justify-content: center;
   gap: 2px;
   flex-wrap: wrap;
-  background: linear-gradient(to right, #9e7a68, #7b5e49, #4e3b32);
-  border-radius: 8px;
+  background-color: #8d614c;
+  /* background: linear-gradient(to right, #8e624d, #7b5e49, #8d614c); */
+  border-radius: 0; 
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; 
 }
 
 .btn {
@@ -85,7 +91,7 @@ router.beforeEach((to, from, next) => {
   font-size: 16px;
   font-weight: bold;
   color: white;
-  background: linear-gradient(to right, #4e6e8e, #3c4f5d, #2a2f3a);
+  background:#5a0b0b;
   border-radius: 8px;
   transition: all 0.3s ease;
   display: inline-block;
@@ -104,7 +110,7 @@ router.beforeEach((to, from, next) => {
 }
 
 .btn:hover {
-  background: linear-gradient(to right, #5e7d95, #4d6575, #3c4b56);
+  background: #dbc641;
   box-shadow: 0 0 12px rgba(80, 173, 240, 0.5);
 }
 

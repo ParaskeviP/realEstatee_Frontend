@@ -84,14 +84,14 @@ const declineUser = (userId) => {
   })
       .then(response => {
         if (response.ok) {
-          openModal('Removed successfully!');
+          openModal('Απερρίφθη επιτυχώς!');
         } else {
-          throw new Error('Failed to remove');
+          throw new Error('Αποτυχία απόρριψης.');
         }
         return response.json();
       })
       .catch(error => {
-        console.error('Error removing user:', error);
+        console.error('Ο χρήστης δεν απερρίφθη:', error);
       });
 };
 

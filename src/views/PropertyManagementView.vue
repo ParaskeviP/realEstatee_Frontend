@@ -16,10 +16,10 @@
           <th>Street Number</th>
         </tr>
         <tr>
-          <th>Price</th>
+          <th>Price(€)</th>
         </tr>
         <tr>
-          <th>Size</th>
+          <th>Size(m²)</th>
         </tr>
         <tr>
           <th>Number of Rooms</th>

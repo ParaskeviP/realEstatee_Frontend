@@ -2,18 +2,19 @@
   <div class="overlay white-text" ref="overlay" @click.self="closeModal">
     <div class="modal-container">
       <div class="modal-content">
+        <span class="close" @click="closeModalAndGoBack">&times;</span>
         <div class="text-center mb-4">
-          <h3 class="display-4 text-dark font-bold">Εγγραφείτε</h3>
+          <h3 class="display-4 text-dark font-bold">Sign Up</h3>
         </div>
         
         <form @submit.prevent="onFormSubmit">
           <div class="form-group">
-            <label for="firstNameFormControl" class="form-label text-dark">Όνομα</label>
+            <label for="firstNameFormControl" class="form-label text-dark">First Name</label>
             <input v-model="user.fname" type="text" class="form-control rounded-3" id="firstNameFormControl" />
           </div>
           
           <div class="form-group">
-            <label for="lastNameFormControl" class="form-label text-dark">Επώνυμο</label>
+            <label for="lastNameFormControl" class="form-label text-dark">Last Name</label>
             <input v-model="user.lname" type="text" class="form-control rounded-3" id="lastNameFormControl" />
           </div>
           
@@ -23,17 +24,17 @@
           </div>
           
           <div class="form-group">
-            <label for="usernameFormControl" class="form-label text-dark">Όνομα Χρήστη</label>
+            <label for="usernameFormControl" class="form-label text-dark">Username</label>
             <input v-model="user.username" type="text" class="form-control rounded-3" id="usernameFormControl" />
           </div>
           
           <div class="form-group">
-            <label for="passwordFormControl" class="form-label text-dark">Κωδικός Πρόσβασης</label>
+            <label for="passwordFormControl" class="form-label text-dark">Password</label>
             <input v-model="user.password" type="password" class="form-control rounded-3" id="passwordFormControl" />
           </div>
           
           <div class="form-group">
-            <label for="userRoleFormControl" class="form-label text-dark">Ρόλος</label>
+            <label for="userRoleFormControl" class="form-label text-dark">Role</label>
             <select v-model="user.role" class="form-control rounded-3" id="userRoleFormControl">
               <option value="ROLE_TENANT">Tenant</option>
               <option value="ROLE_OWNER">Owner</option>
@@ -41,12 +42,12 @@
           </div>
           
           <div class="form-group">
-              <label for="phoneFormControl" class="form-label text-dark">Κινητό</label>
+              <label for="phoneFormControl" class="form-label text-dark">Phone Number</label>
               <input v-model="user.phoneNumber" type="text" class="form-control rounded-3" id="phoneFormControl" />
           </div>
           
           <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-lg rounded-3 font-bold">Καλώς Ορίσατε!</button>
+            <button type="submit" class="btn btn-primary btn-lg rounded-3 font-bold">Welcome!</button>
           </div>
         </form>
         
@@ -70,11 +71,12 @@ const user = ref({
   phoneNumber: ''
 });
 
+const showModal = ref(true);
 const msg = ref('');
 const router = useRouter();
 
 const onFormSubmit = () => {
-  const endpoint = `http://localhost:8080/api/auth/signup`; // Use backendURL variable here
+  const endpoint = `http://localhost:8080/api/auth/signup`; 
   const userData = {
     username: user.value.username,
     email: user.value.email,
@@ -117,16 +119,21 @@ const togglerOwnerFields = () => {
   }
 };
 
-const openModal = (message) => {
-  modalMessage.value = message;
-  showModal.value = true;
-};
-
 const closeModal = () => {
   showModal.value = false;
+};
+
+const goBack = () => {
+  if (window.confirm("Είστε σίγουρος ότι θέλετε να επιστρέψετε;")) {
+    window.history.back();
+  }
+};
+
+const closeModalAndGoBack = () => {
+  closeModal();
   setTimeout(() => {
-    location.reload();
-  }, 500);
+    goBack();
+  }, 300);
 };
 </script>
 
@@ -145,15 +152,29 @@ const closeModal = () => {
   z-index: 1000;
 }
 
-/* Modal Container */
 .modal-container {
-  background-color: #9E6871;
+  background-color: #b88d72;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   max-width: 500px;
   width: 100%;
   text-align: center;
+  max-height: 80vh; 
+  overflow-y: auto; 
+}
+
+.modal-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+  background-color: #815c45; /* Χρώμα μπάρας */
+  border-radius: 5px;
+}
+
+.modal-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; 
 }
 
 /* Heading and Text */
@@ -164,7 +185,6 @@ h3 {
   margin-bottom: 2rem;
 }
 
-/* Form styling */
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -176,7 +196,6 @@ label {
   display: block;
 }
 
-/* Inputs */
 input.form-control,
 select.form-control {
   padding: 12px;
@@ -195,7 +214,7 @@ select.form-control:focus {
 }
 
 button.btn {
-  background-color: #80535A;
+  background-color: #815c45;
   color: white;
   padding: 15px 25px;
   font-size: 1.2rem;
@@ -214,6 +233,7 @@ button.btnX {
   font-size: 1.2rem;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
   align-content: right;
   width: 15%;
   transition: background-color 0.3s ease;
@@ -221,17 +241,19 @@ button.btnX {
 }
 
 button.btn:hover {
-  background-color: #926c7a; /* Darker blue on hover */
+  background-color: #5a3b28; 
 }
 
-/* Error Message */
+.close:hover {
+  color: red;
+}
+
 .text-danger {
-  color: #38120e; /* Red color for error messages */
+  color: #38120e; 
   font-size: 1rem;
   margin-top: 1rem;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .modal-container {
     padding: 1.5rem;
@@ -239,7 +261,7 @@ button.btn:hover {
   }
 
   h3 {
-    font-size: 1.5rem; /* Slightly smaller font on mobile */
+    font-size: 1.5rem; 
   }
 
   .form-group {

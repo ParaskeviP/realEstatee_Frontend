@@ -1,41 +1,42 @@
 <template>
     <div>
-    <h1>Οι Αιτήσεις μου</h1>
+    <h1>My Applications</h1>
       <div v-if="paginatedRequests.length > 0">
         <table class="table">
           <thead>
           <tr>
-            <th>Ιδιοκτήτης</th>
-            <th>Τηλέφωνο</th>
-            <th>ID Ακίνητου</th>
-            <th>Είδος</th>
-            <th>Κατάσταση</th>
+            <th>Owner</th>
+            <th>Phone Number</th>
+            <th>Property ID</th>
+            <th>Request Category</th>
+            <th>Status</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="request in paginatedRequests" :key="request.id">
-            <td>{{ request.owner.email }}</td>
+            <td>{{ request.owner.lname +' '+ request.owner.fname}}</td>
             <td>{{ request.owner.phonenumber }}</td>
             <td>{{ request.property.id }}</td>
             <td>
-                <span v-if="request.isRentalRequest">Ενοικίαση</span>
-                <span v-else>Επίδειξη</span>
+                <span v-if="request.isRentalRequest">Rental</span>
+                <span v-else>Viewing</span>
             </td>
             <td>
                 <span v-if="request.isViewingApproved">✔️</span>
-                <span v-else>✘</span>
+                <span v-if="request.isViewingApproved ===false">✘</span>
+                <span v-else-if="request.isViewingApproved===null">Pending</span>
             </td>
           </tr>
           </tbody>
         </table>
         <div class="pagination">
           <button @click="prevPage" :disabled="currentPage === 1" class="pagination-btn"><=</button>
-          Σελίδα {{ currentPage }}/{{ totalPages }}
+          Page {{ currentPage }}/{{ totalPages }}
           <button @click="nextPage" :disabled="currentPage === totalPages" class="pagination-btn">=></button>
         </div>
       </div>
       <div v-else>
-        Δεν υπάρχουν αιτήσεις.
+        No applications found!
       </div>
       <div v-if="showModal" class="modal">
         <div class="modal-content success">
@@ -171,7 +172,7 @@
   }
   
   th {
-    background-color: #535A80;
+    background-color: #5a0b0b;
     color: white;
     font-weight: bold;
   }
@@ -197,7 +198,7 @@
   
   button {
     margin-top: 10px;
-    background: #535A80;
+    background: #5a0b0b;
     color: white;
     font-size: 16px;
     padding: 13px;
@@ -210,14 +211,14 @@
   }
   
   button:hover {
-    background: linear-gradient(45deg, #535A80, #003f7f);
+    background: #9e1414;
     transform: translateY(-3px); 
     box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
   }
   
   button:active {
     transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(0, 86, 179, 0.4);
+    box-shadow: #5a0b0b;
   }
   
   .modal {
@@ -265,11 +266,23 @@
     color: #333333;
   }
 
-h1 {
+  h1 {
   font-size: 4rem;
-  text-align: center;
-  color: #373b55;
-  text-shadow: 2px 2px 6px rgba(55, 59, 85, 0.5), -2px -2px 6px rgba(255, 255, 255, 0.2);
+  color: #5a0b0b; 
   margin: 20px 0;
+  position: absolute;
+  top: 90px; 
+  left: 20px;
+  border-bottom: 3px double #4a4a4a; /* Διπλή γραμμή σε σκούρο γκρι */
+    padding-bottom: 0px; /* Δίνει λίγο χώρο πριν τη γραμμή */
+    width: fit-content; /* Για να προσαρμόζεται στο μήκος του τίτλου */
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 100vw;
+    /* border-bottom: 3px double #4a4a4a; */
+    margin-top: 0px;
 }
   </style>

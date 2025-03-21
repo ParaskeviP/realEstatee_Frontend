@@ -1,21 +1,21 @@
 <template>
   <div>
+    <h1>Pending Requests</h1>
     <div v-if="paginatedProperties.length > 0">
-    <h1>Εκκρεμείς Αιτήσεις</h1>
       <table class="table">
         <thead>
         <tr>
-            <th>ID Ιδιοκτήτη</th>
-            <th>ID Ακινήτου</th>
-            <th>Πόλη</th>
-            <th>Οδός</th>
-            <th>Νούμερο</th>
-            <th>Μέγεθος (τ.μ)</th>
-            <th>Τιμή (€)</th>
-            <th>Αριθμός Δωματίων</th>
-            <th>Αριθμός Υπνοδωματίων</th>
-            <th>Αριθμός WC</th>
-            <th>Επιλογές</th>
+            <th>Owner ID</th>
+            <th>Property ID</th>
+            <th>City</th>
+            <th>Street</th>
+            <th>Street Number</th>
+            <th>Size(m²)</th>
+            <th>Price(€)</th>
+            <th>Number of Rooms</th>
+            <th>Number of Bedrooms</th>
+            <th>Number of WC</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -31,20 +31,20 @@
           <td>{{ property.bedNum }}</td>
           <td>{{ property.bathNum }}</td>
           <td v-if="property.id">
-            <button class="btn stylish-btn" @click="removeProperty(property.id)">Απόρριψη</button>
-            <button class="btn stylish-btn" @click="approveProperty(property.id)">Επικύρωση</button>
+            <button class="btn stylish-btn" @click="removeProperty(property.id)">Decline</button>
+            <button class="btn stylish-btn" @click="approveProperty(property.id)">Approve</button>
           </td>
         </tr>
         </tbody>
       </table>
       <div class="pagination">
         <button @click="prevPage" :disabled="currentPage === 1" class="pagination-btn"><=</button>
-        Σελίδα {{ currentPage }}/{{ totalPages }}
+        Page {{ currentPage }}/{{ totalPages }}
         <button @click="nextPage" :disabled="currentPage === totalPages" class="pagination-btn">=></button>
       </div>
     </div>
     <div v-else>
-      Δεν εκκρεμούν αιτήσεις!
+      <h2>No Pending Requests Available!</h2>
     </div>
     <div v-if="showModal" class="modal">
       <div class="modal-content success">
@@ -296,11 +296,28 @@ button:active {
   color: #333333;
 }
 
+h2{
+  margin: 20px 0;
+  left: 20px;
+  position: absolute;
+}
+
 h1 {
   font-size: 4rem;
-  text-align: center;
-  color: #373b55;
-  text-shadow: 2px 2px 6px rgba(55, 59, 85, 0.5), -2px -2px 6px rgba(255, 255, 255, 0.2);
+  color: #5a0b0b; 
   margin: 20px 0;
+  position: absolute;
+  top: 90px; 
+  left: 20px;
+  border-bottom: 3px double #4a4a4a;
+    padding-bottom: 0px; 
+    width: fit-content; 
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 100vw;
+    margin-top: 0px;
 }
 </style>

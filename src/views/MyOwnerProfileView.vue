@@ -1,33 +1,41 @@
 <template>
-    <h1>Το Προφίλ μου</h1>
     <div class="user-profile">
+      <h1>My Profile</h1>
+      <div class="form-container">
+      <div class="modal-container">
+
+        <div class="content">
+
         <div class="user-info">
-            <span class="label">Όνομα Χρήστη: </span> <span>{{ user?.user?.username || 'N/A' }}</span>
+            <span class="label">Username: </span> <span>{{ user?.user?.username || 'N/A' }}</span>
         </div>
         <div class="user-info">
             <span class="label">Email: </span> <span>{{ user?.email || 'N/A' }}</span>
         </div>
         <div class="user-info">
-            <span class="label">Όνομα: </span> <span>{{ user?.fname || 'N/A' }}</span>
+            <span class="label">First Name: </span> <span>{{ user?.fname || 'N/A' }}</span>
         </div>
         <div class="user-info">
-            <span class="label">Επίθετο: </span> <span>{{ user?.lname || 'N/A' }}</span>
+            <span class="label">Last Name: </span> <span>{{ user?.lname || 'N/A' }}</span>
         </div>
         <div class="user-info">
-            <span class="label">Ενεργοποιημένος: </span> 
+            <span class="label">Activated Account: </span> 
             <span v-if="user?.user?.isApproved">✔️</span>
             <span v-else>✘</span>
         </div>
         <div class="user-info">
-            <span class="label">Ρόλοι: </span>
-            <span v-if="user?.user?.roles?.some(role => role.name === 'ROLE_TENANT')">Ενοικιαστής</span>
-            <span v-else-if="user?.user?.roles?.some(role => role.name === 'ROLE_OWNER')">Ιδιοκτήτης</span>
+            <span class="label">Role: </span>
+            <span v-if="user?.user?.roles?.some(role => role.name === 'ROLE_TENANT')">Tenant</span>
+            <span v-else-if="user?.user?.roles?.some(role => role.name === 'ROLE_OWNER')">Owner</span>
             <span v-else-if="user?.user?.roles?.some(role => role.name === 'ROLE_ADMIN')">Administrator</span>
-            <span v-else>Χωρίς ρόλο</span>
+            <span v-else>No role</span>
         </div>
         <div>
-            <button v-if="user?.id" class="btn stylish-btn" @click="removeUser(user.id)">Διαγραφή Λογαριασμού</button>
+            <button v-if="user?.id" class="btn stylish-btn" @click="removeUser(user.id)">Delete Account</button>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
 </template>
 
@@ -128,6 +136,37 @@ const closeModal = () => {
   gap: 20px;
 }
 
+.modal-content {
+  background-color: #80535A;
+  color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1002;
+  margin: auto;
+}
+
+.modal-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
+  background-color: #732a2a;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
+}
+
 .user-card {
   width: 100%;
   max-width: 400px;
@@ -145,14 +184,14 @@ const closeModal = () => {
   display: flex;
   justify-content: space-between;
   font-size: 16px;
-  color: #333;
+  color: #fffefe;
   padding: 5px 0;
   border-bottom: 1px solid #eee;
 }
 
 .label {
   font-weight: bold;
-  color: #535A80;
+  color: #d6d6d6;
 }
 
 button {
@@ -176,9 +215,21 @@ button:hover {
 
 h1 {
   font-size: 4rem;
-  text-align: center;
-  color: #373b55;
-  text-shadow: 2px 2px 6px rgba(55, 59, 85, 0.5), -2px -2px 6px rgba(255, 255, 255, 0.2);
+  color: #5a0b0b; 
   margin: 20px 0;
+  position: absolute;
+  top: 90px; 
+  left: 20px;
+  border-bottom: 3px double #4a4a4a; /* Διπλή γραμμή σε σκούρο γκρι */
+    padding-bottom: 0px; /* Δίνει λίγο χώρο πριν τη γραμμή */
+    width: fit-content; /* Για να προσαρμόζεται στο μήκος του τίτλου */
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 100vw;
+    /* border-bottom: 3px double #4a4a4a; */
+    margin-top: 0px;
 }
 </style>

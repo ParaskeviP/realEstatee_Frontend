@@ -54,7 +54,10 @@ html, body {
   
   background-attachment: fixed;
   background-size: cover;
-  background: linear-gradient(to bottom, #909094, #dadadb);
+  background-image: url('@/assets/background.png');
+  /* background-image: url('https://raw.githubusercontent.com/ParaskeviP/DevOps/30da7a53c60660ff9cb6326bdfb99b8e02ac24b1/background.png?token=GHSAT0AAAAAADAG4O5AXVD4AMRDJI5X2ATAZ6P7LOA'); */
+  background-position: center;
+  /* background: linear-gradient(to bottom, #7b8ab7, #dadadb);  */
 }
 
 .home header {

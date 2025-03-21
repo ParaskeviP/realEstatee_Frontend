@@ -1,34 +1,34 @@
 <template>
-  <h1>Εκκρεμούσες Αιτήσεις</h1>
+  <h1>Pending Requests</h1>
   <div class="request-list-view white-text">
     <div v-if="paginatedRequests.length>0">
       <table class="table">
         <thead>
         <tr>
-          <th>ID Ενοικιαστή</th>
-          <th>ID Ακινήτου</th>
-          <th>Κατηγορία Αιτήματος</th>
-          <th>Κατάσταση</th>
-          <th>Επιλογές</th>
+          <th>Tenant</th>
+          <th>Property ID</th>
+          <th>Request Category</th>
+          <th>Status</th>
+          <th>Options</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="request in paginatedRequests" :key="request.id">
-          <td>{{ request.tenant.id }}</td>
+          <td>{{ request.tenant.fname + ' ' + request.tenant.lname }}</td>
           <td>{{ request.property.id }}</td>
-          <td>{{ request.isRentalRequest ? "Ενοικίαση" : "Επίδειξη" }}</td>
+          <td>{{ request.isRentalRequest ? "Rental" : "Viewing" }}</td>
           <td>
-            {{ request.isViewingApproved === null ? "Εκκρεμεί" : request.isViewingApproved ? "Δεκτό" : "Απερρίφθη" }}
+            {{ request.isViewingApproved === null ? "Pending" : request.isViewingApproved ? "Accepted" : "Rejected" }}
           </td>
 
           <td>
             <!-- Show buttons only if the request is a rental request or if the status is null for viewing requests -->
             <button v-if=" (request.isViewingApproved ===null && !request.isViewingApproved === true && !request.isViewingApproved === false) || request.isRentalRequest ||( !request.isRentalRequest && request.isViewingApproved === null)" class="btn stylish-btn" @click="approveRequest(request.id, request.isRentalRequest)">
-              Έγκριση
+              Approve
             </button>
 
             <button v-if=" (request.isViewingApproved ===null && !request.isViewingApproved === true && !request.isViewingApproved === false) || request.isRentalRequest ||( !request.isRentalRequest && request.isViewingApproved === null)" class="btn stylish-btn" @click="declineRequest(request.id)">
-              Απόρριψη
+              Decline
             </button>
           </td>
         </tr>
@@ -37,12 +37,12 @@
 
       <div class="pagination white-text"> <!-- buttons for previous and next pages in the table -->
         <button @click="prevPage" :disabled="currentPage === 1"><=</button>
-        Σελίδα {{ currentPage }}/{{ totalPages }}
+        Page {{ currentPage }}/{{ totalPages }}
         <button @click="nextPage" :disabled="currentPage === totalPages">=></button>
       </div>
     </div>
     <div v-else-if="hasSearched">
-      <h3>No Requests</h3>
+      <h2>No Requests</h2>
     </div>
 
     <div v-if="showModal" class="modal">
@@ -210,8 +210,8 @@ const declineRequest = (requestId) => {
 }
 
 .pagination button {
-  background-color: #3498db; /* Blue */
-  color: #fff; /* White */
+  background-color: #8d614c; 
+  color: #fff; 
   padding: 8px 16px;
   cursor: pointer;
   border: none;
@@ -220,19 +220,27 @@ const declineRequest = (requestId) => {
 table th,
 table td {
   transition: all 0.7s ease-in-out;
+  border-right: 2px solid #ddd; 
+  padding: 10px; 
 }
 
 table {
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 50px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  border-color: #333;
+  border-style:none;
   margin: auto;
+  /* height: 20%; */
+  width: 100%; 
+  font-size: 1.2rem; 
+  padding: 100px;
 }
 
 th {
-  background-color: #535A80;
+  background-color: #5a0b0b;
   color: white;
   font-weight: bold;
   padding: 10px;
@@ -284,7 +292,7 @@ tr:hover {
 
 button {
   margin-top: 10px;
-  background: #535A80;
+  background: #5a0b0b;
   color: white;
   font-size: 16px;
   padding: 13px;
@@ -325,7 +333,7 @@ h3 {
 }
 
 button:hover {
-  background: linear-gradient(45deg, #535A80, #003f7f);
+  background: #dbc641;
   transform: translateY(-3px); 
   box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
 }
@@ -337,10 +345,29 @@ button:active {
 
 h1 {
   font-size: 4rem;
-  text-align: center;
-  color: #373b55;
-  text-shadow: 2px 2px 6px rgba(55, 59, 85, 0.5), -2px -2px 6px rgba(255, 255, 255, 0.2);
+  color: #5a0b0b; 
   margin: 20px 0;
+  position: absolute;
+  top: 90px; 
+  left: 20px;
+  border-bottom: 3px double #4a4a4a; /* Διπλή γραμμή σε σκούρο γκρι */
+    padding-bottom: 0px; /* Δίνει λίγο χώρο πριν τη γραμμή */
+    width: fit-content; /* Για να προσαρμόζεται στο μήκος του τίτλου */
 }
+
+h1::after {
+    content: "";
+    display: block;
+    width: 100vw;
+    /* border-bottom: 3px double #4a4a4a; */
+    margin-top: 0px;
+}
+
+h2{
+  margin: 20px 0;
+  left: 20px;
+  position: absolute;
+}
+
 </style>
 

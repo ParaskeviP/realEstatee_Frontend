@@ -1,50 +1,49 @@
 <template>
   <div class="property-search">
-    <h1>Αναζήτηση</h1>
+    <h1>Search</h1>
     <form @submit.prevent="searchProperties">
       <div class="filter-box">
-        <label for="searchType">Εφαρμογή Φίλτρου</label>
-          <input v-model="roomNumFilter" placeholder="Αριθμός Δωματίων" type="number">
-          <input v-model="bedNumFilter" placeholder="Αριθμός Κρεβατοκαμαρών" type="number">
-          <input v-model="bathNumFilter" placeholder="Αριθμός WC" type="number">
-          <input v-model="cityFilter" placeholder="Πόλη" type="text">
-          <input v-model="sizeFilter" placeholder="Μέγεθος (m²)" type="number">
-          <input v-model="priceFilter" placeholder="Μέγιστη Τιμή" type="number">
-          <label><input v-model="petsAllowedFilter" type="checkbox">Επιτρέπονται Κατοικίδια</label>
-          <label><input v-model="hasGardenFilter" type="checkbox">Έχει Κήπο</label>
-          <label><input v-model="hasBalconyFilter" type="checkbox">Έχει Μπαλκόνια</label>
-          <label><input v-model="hasHeatingFilter" type="checkbox">Έχει Θέρμανση</label>
-          <label><input v-model="isFurnishedFilter" type="checkbox">Είναι Επιπλωμένο</label>
-
+        <label for="searchType">Filters</label>
+        <input v-model="roomNumFilter" placeholder="Number of Rooms" type="number">
+          <input v-model="bedNumFilter" placeholder="Number of Bedrooms" type="number">
+          <input v-model="bathNumFilter" placeholder="Number of WC" type="number">
+          <input v-model="cityFilter" placeholder="City" type="text">
+          <input v-model="sizeFilter" placeholder="Size(m²)" type="number">
+          <input v-model="priceFilter" placeholder="Maximum Price" type="number">
+          <label><input v-model="petsAllowedFilter" type="checkbox">Pets Allowed</label>
+          <label><input v-model="hasGardenFilter" type="checkbox">Garden Available</label>
+          <label><input v-model="hasBalconyFilter" type="checkbox">Balcony Available</label>
+          <label><input v-model="hasHeatingFilter" type="checkbox">Heating</label>
+          <label><input v-model="isFurnishedFilter" type="checkbox">Furnished</label>
           <button type="submit">🔎</button>
       </div>
     </form>
 
     <!-- Αποτελέσματα Αναζήτησης -->
     <div v-if="properties.length > 0">
-      <h2>Αποτελέσματα Αναζήτησης</h2>
+      <h3>Search Results</h3>
         <div style="overflow-x:auto;">
           <table>
             <thead>
             <tr>
               <th>ID</th>
-              <th>Πόλη</th>
-              <th>Οδός</th>
-              <th>Νούμερο</th>
-              <th>Μέγεθος (τ.μ)</th>
-              <th>Τιμή (€)</th>
-              <th>Αριθμός Δωματίων</th>
-              <th>Αριθμός Υπνοδωματίων</th>
-              <th>Αριθμός WC</th>
-              <th>Επιτρέπονται τα κατοικίδια</th>
-              <th>Κήπο</th>
-              <th>Μπαλκόνια</th>
-              <th>Κεντρική Θέρμανση</th>
-              <th>Ψήξη</th>
-              <th>Επιπλωμένο</th>
-              <th>Έτος Κατασκευής</th>
-              <th>Έτος Ανακαίνησης</th>
-              <th>Επιλογές</th>
+              <th>City</th>
+              <th>Street</th>
+              <th>Street Number</th>
+              <th>Size(m²)</th>
+              <th>Price(€)</th>
+              <th>Number of Rooms</th>
+              <th>Number of Bedrooms</th>
+              <th>Number of WC</th>
+              <th>Pets Allowed</th>
+              <th>Garden Available</th>
+              <th>Balcony Available</th>
+              <th>Heating</th>
+              <th>AC</th>
+              <th>Furnished</th>
+              <th>Built Year</th>
+              <th>Renovation Year</th>
+              <th>Make Requests</th>
             </tr>
             </thead>
             <tbody>
@@ -85,10 +84,10 @@
               <td>{{ property.builtYear }}</td>
               <td>{{ property.renovationYear }}</td>
               <button class="btn stylish-btn" @click="makeRentalRequest(property.id)">
-                Θέλω να Ενοικιάσω
+                Rental
               </button>
               <button class="btn stylish-btn" @click="makeViewingRequest(property.id)">
-                Θέλω να το Δω
+                Viewing
               </button>
 
             </tr>
@@ -97,12 +96,12 @@
         </div>
       <div class="pagination">
         <button @click="prevPage" :disabled="currentPage === 1" class="pagination-btn"><=</button>
-        Σελίδα {{ currentPage }}/{{ totalPages }}
+        Page {{ currentPage }}/{{ totalPages }}
         <button @click="nextPage" :disabled="currentPage === totalPages" class="pagination-btn">=></button>
       </div>
     </div>
     <div v-else-if="hasSearched">
-      <h3>Δεν βρέθηκαν ακίνητα για την συγκεκριμένη αναζήτηση!</h3>
+      <h2 class="noresult">No Properties Found!</h2>
     </div>
 
     <div v-if="showModal" class="modal">
@@ -122,6 +121,8 @@ const userData = loadUserData();
 
 const properties = ref([]);
 const errorMessage = ref("");
+const searchType = ref("");
+const queryValue = ref("");
 
 const instance = getCurrentInstance();
 const showModal = ref(false);
@@ -140,24 +141,24 @@ const closeModal = () => {
   }, 500);
 };
 
-// const fetchProperties = () => {
-//   hasSearched.value = false; // Αρχικοποίηση
+const fetchProperties = () => {
+  hasSearched.value = false; // Αρχικοποίηση
 
-//   fetch(`http://localhost:8080/api/tenant/showProperties`, {  //only properties without tenant
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'Authorization': `Bearer ${userData.token}`,
-//     },
-//   })
-//       .then(response => response.json())
-//       .then(data => {
-//         properties.value = data;
-//         hasSearched.value = true; // Σηματοδοτούμε ότι έγινε αναζήτηση
-//       })
-//       .catch(error => console.error('Error fetching properties:', error));
+  fetch(`http://localhost:8080/api/tenant/showProperties`, {  //only properties without tenant
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${userData.token}`,
+    },
+  })
+      .then(response => response.json())
+      .then(data => {
+        properties.value = data;
+        hasSearched.value = true; // Σηματοδοτούμε ότι έγινε αναζήτηση
+      })
+      .catch(error => console.error('Error fetching properties:', error));
 
-// };
+};
 
 const makeRentalRequest = (propertyId) => {
   fetch(`http://localhost:8080/api/tenant/makeRentalRequest/${propertyId}`, {
@@ -241,11 +242,67 @@ const hasBalconyFilter=ref("");
 const hasHeatingFilter=ref("");
 const isFurnishedFilter=ref("");
 
+// async function searchProperties() {
+//   console.log("Search button clicked");
+//   try {
+//     hasSearched.value = false;
+
+//     console.log("Search Type:", searchType.value);
+//     console.log("Query Value:", queryValue.value);
+
+//     // Δημιουργία παραμέτρων URL
+//     const params = new URLSearchParams();
+
+//     if (roomNumFilter.value) params.append("roomNum", roomNumFilter.value);
+//     if (bedNumFilter.value) params.append("bedNum", bedNumFilter.value);
+//     if (bathNumFilter.value) params.append("bathNum", bathNumFilter.value);
+//     if (cityFilter.value) params.append("city", cityFilter.value);
+//     if (sizeFilter.value) params.append("size", sizeFilter.value);
+//     if (priceFilter.value) params.append("price", priceFilter.value);
+//     if (petsAllowedFilter.value) params.append("petsAllowed", petsAllowedFilter.value);
+//     if (hasGardenFilter.value) params.append("hasGarden", hasGardenFilter.value);
+//     if (hasBalconyFilter.value) params.append("hasBalcony", hasBalconyFilter.value);
+//     if (hasHeatingFilter.value) params.append("hasHeating", hasHeatingFilter.value);
+//     if (isFurnishedFilter.value) params.append("isFurnished", isFurnishedFilter.value);
+
+//     // Δημιουργία URL με παραμέτρους
+//     const url = `http://localhost:8080/api/properties/${searchType.value}/${queryValue.value}?${params.toString()}`;
+//     console.log("url", url);
+//     const response = await fetch(url, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Authorization": `Bearer ${userData.token}`,
+//       },
+//     });
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+
+//     hasSearched.value = true;
+
+//     const data = await response.json();
+//     properties.value = data;
+//     console.log(properties.value);
+//     errorMessage.value = "";
+
+//   } catch (error) {
+//     hasSearched.value = true;
+//     console.error("Error fetching properties:", error);
+//     errorMessage.value = "Failed to fetch properties. Please try again.";
+//   }
+// }
+
 async function searchProperties() {
   try {
       hasSearched.value = false;
+properties.value = [];
 
       console.log(roomNumFilter.value);
+
+
+    const params = new URLSearchParams();
 
       if(roomNumFilter.value) params.append("roomNum", roomNumFilter.value);
       if(bedNumFilter.value) params.append("bedNum", bedNumFilter.value);
@@ -296,14 +353,14 @@ async function searchProperties() {
 .filter-box {
   position: fixed;
   left: 0;
-  top: 50%;
+  top: 60%;
   transform: translateY(-50%);
   width: 250px;
-  background: #ddd;
+  background: #5a0b0b;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(9, 9, 9, 0.2);
+  overflow-y: scroll;
 }
 
 .property-search select {
@@ -324,7 +381,7 @@ async function searchProperties() {
 .property-search label {
   font-size: 16px;
   margin-bottom: 8px;
-  color: #333;
+  color: #cac5c5;
   font-weight: bold;
   display: block;
   margin-top: 10px;
@@ -374,6 +431,7 @@ table {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   margin: auto;
+  width: 80%;
 }
 
 th, td {
@@ -381,10 +439,13 @@ th, td {
   text-align: center;
   font-size: 16px;
   color: #333;
+  transition: all 0.7s ease-in-out;
+  border-right: 2px solid #ddd; 
+  padding: 10px; 
 }
 
 th {
-  background-color: #535A80;
+  background-color: #5a0b0b;
   color: white;
   font-weight: bold;
 }
@@ -410,7 +471,7 @@ table td {
 
 button {
   margin-top: 10px;
-  background: #535A80;
+  background: #a61010;
   color: white;
   font-size: 16px;
   padding: 13px;
@@ -423,21 +484,50 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(45deg, #535A80, #003f7f);
+  background: #7c0b0b;
   transform: translateY(-3px); 
   box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
 }
 
 button:active {
   transform: translateY(1px);
-  box-shadow: 0 2px 4px rgba(0, 86, 179, 0.4);
+  box-shadow: #7c0b0b;
 }
 
 h1 {
   font-size: 4rem;
-  text-align: center;
-  color: #373b55;
-  text-shadow: 2px 2px 6px rgba(55, 59, 85, 0.5), -2px -2px 6px rgba(255, 255, 255, 0.2);
+  color: #5a0b0b; 
   margin: 20px 0;
+  position: absolute;
+  top: 90px; 
+  left: 20px;
+  border-bottom: 3px double #4a4a4a; 
+    padding-bottom: 0px; 
+    width: fit-content; 
 }
+
+h1::after {
+    content: "";
+    display: block;
+    width: 100vw;
+    margin-top: 0px;
+}
+
+h2{
+  margin: 20px 0;
+  left: 20px;
+  position: absolute;
+}
+
+.noresult {
+  padding: 0px 10px;
+  text-align: center;
+  color: #333;
+  /* position: absolute; */
+  /* right: 20px; */
+  /* position: fixed; */
+  right: 10%;
+  top: 25%;
+}
+
 </style> 

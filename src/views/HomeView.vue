@@ -1,13 +1,5 @@
 <template>
   <div class="zoomInUp">
-    <h1>Ηλύσιον</h1>
-    <div class="image-container">
-      <img src="/src/assets/home_page_hero.jpg">
-      <img src="/src/assets/home_page_2.jpg">
-    </div>
-
-    <p></p>
-    <h3>Σπίτια. Δεν έχουμε και τίποτα άλλο...</h3>
   </div>
 </template>
 

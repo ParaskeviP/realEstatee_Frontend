@@ -1,6 +1,6 @@
 <template>
   <div class="text-center mb-4">
-    <h1 class="fs-3">Προσθήκη Ακινήτου</h1>
+    <h1 class="fs-3 property-title">Add a Property for Rent</h1>
   </div>
   <div class="overlay white-text box">
     <div class="form-container">
@@ -9,147 +9,147 @@
 
           <form @submit.prevent="onFormSubmit">
             <div class="mb-2">
-              <label for="cityFormControl" class="form-label mb-1">Πόλη</label>
+              <label for="cityFormControl" class="form-label mb-1">City</label>
               <div class="col-sm-8">
                 <input v-model="property.city" type="text" class="form-control" id="cityFormControl" pattern="[A-Za-z]+" title="Please enter only letters" required />
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="streetFormControl" class="form-label mb-1">Οδός</label>
+              <label for="streetFormControl" class="form-label mb-1">Street</label>
               <div class="col-sm-8">
                 <input v-model="property.street" type="text" class="form-control" id="streetFormControl" pattern="[A-Za-z]+" title="Please enter only letters" required />
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="streetNumFormControl" class="form-label mb-1">Νούμερο</label>
+              <label for="streetNumFormControl" class="form-label mb-1">Street Number</label>
               <div class="col-sm-4">
                 <input v-model="property.streetNum" type="number" class="form-control" id="streetNumFormControl"  min="0" title="Please enter only numbers" required />
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="priceFormControl" class="form-label mb-1">Τιμή (σε €)</label>
+              <label for="priceFormControl" class="form-label mb-1">Price(€)</label>
               <div class="col-sm-4">
                 <input v-model="property.price" type="number" class="form-control" id="priceFormControl"  min="0" title="Please enter only numbers" required />
               </div>
             </div>
             
             <div class="mb-2">
-              <label for="sizeFormControl" class="form-label mb-1">Μέγεθος (σε τ.μ)</label>
+              <label for="sizeFormControl" class="form-label mb-1">Size(m²)</label>
               <div class="col-sm-4">
                 <input v-model="property.size" type="number" class="form-control" id="sizeFormControl"  min="0" title="Please enter only numbers" required />
               </div>
             </div>
             
             <div class="mb-2">
-              <label for="roomNumFormControl" class="form-label mb-1">Σύνολο Δωματίων</label>
+              <label for="roomNumFormControl" class="form-label mb-1">Total Rooms</label>
               <div class="col-sm-4">
                 <input v-model="property.roomNum" type="number" class="form-control" id="roomNumFormControl"  min="0" title="Please enter only numbers" required />
               </div>
             </div>
             
             <div class="mb-2">
-              <label for="bedNumFormControl" class="form-label mb-1">Εκ των οποίων κρεβατοκάμαρες</label>
+              <label for="bedNumFormControl" class="form-label mb-1">Bedrooms</label>
               <div class="col-sm-4">
                 <input v-model="property.bedNum" type="number" class="form-control" id="bedNumFormControl"  min="0" title="Please enter only numbers" required />
               </div>
 
             </div>
             <div class="mb-2">
-              <label for="bathNumFormControl" class="form-label mb-1">Αριθμός WC</label>
+              <label for="bathNumFormControl" class="form-label mb-1">Bathrooms</label>
               <div class="col-sm-4">
                 <input v-model="property.bathNum" type="number" class="form-control" id="bathNumFormControl"  min="0" title="Please enter only numbers" required />
               </div>
             </div>
             
             <div class="mb-2">
-              <label for="builtYearFormControl" class="form-label mb-1">Έτος Κατασκευής</label>
+              <label for="builtYearFormControl" class="form-label mb-1">Built Year</label>
               <div class="col-sm-4">
                 <input v-model="property.builtYear" type="number" class="form-control" id="builtYearFormControl"  min="1950" max="2025" title="Please enter only numbers" required />
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="renovationYearFormControl" class="form-label mb-1">Έτος Ανακαίνησης (Αν όχι, βάλτε το ίδιο έτος)</label>
+              <label for="renovationYearFormControl" class="form-label mb-1">Renovation Year (Αν όχι, βάλτε το ίδιο έτος)</label>
               <div class="col-sm-4">
                 <input v-model="property.renovationYear" type="number" class="form-control" id="renovationYearFormControl"  min="1950" max="2025" title="Please enter only numbers" required />
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="isFurnishedFormControl" class="form-label mb-1">Είναι Επιπλωμένο;</label>
+              <label for="isFurnishedFormControl" class="form-label mb-1">Furnished</label>
               <div class="col-sm-4">
                 <select v-model="property.isFurnished" class="form-select" id="isFurnishedFormControl" required>
-                  <option :value="true">Ναι</option>
-                  <option :value="false">Όχι</option>
+                  <option :value="true">Yes</option>
+                  <option :value="false">No</option>
                 </select>
               </div>
             </div>
             
             <div class="mb-2">
-              <label for="hasParkingFormControl" class="form-label mb-1">Έχει χώρο για Πάρκινγκ;</label>
+              <label for="hasParkingFormControl" class="form-label mb-1">Parking Space</label>
               <div class="col-sm-4">
                 <select v-model="property.hasParking" class="form-select" id="hasParkingFormControl" required>
-                  <option :value="true">Ναι</option>
-                  <option :value="false">Όχι</option>
+                  <option :value="true">Yes</option>
+                  <option :value="false">No</option>
                 </select>
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="hasBalconyFormControl" class="form-label mb-1">Έχει μπαλκόνια;</label>
+              <label for="hasBalconyFormControl" class="form-label mb-1">Balcony</label>
               <div class="col-sm-4">
                 <select v-model="property.hasBalcony" class="form-select" id="hasBalconyFormControl" required>
-                  <option :value="true">Ναι</option>
-                  <option :value="false">Όχι</option>
+                  <option :value="true">Yes</option>
+                  <option :value="false">No</option>
                 </select>
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="hasGardenFormControl" class="form-label mb-1">Έχει κήπο;</label>
+              <label for="hasGardenFormControl" class="form-label mb-1">Garden</label>
               <div class="col-sm-4">
                 <select v-model="property.hasGarden" class="form-select" id="hasGardenFormControl" required>
-                  <option :value="true">Ναι</option>
-                  <option :value="false">Όχι</option>
+                  <option :value="true">Yes</option>
+                  <option :value="false">No</option>
                 </select>
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="hasHeatingFormControl" class="form-label mb-1">Έχει κεντρική θέρμανση;</label>
+              <label for="hasHeatingFormControl" class="form-label mb-1">Heating</label>
               <div class="col-sm-4">
                 <select v-model="property.hasHeating" class="form-select" id="hasHeatingFormControl" required>
-                  <option :value="true">Ναι</option>
-                  <option :value="false">Όχι</option>
+                  <option :value="true">Yes</option>
+                  <option :value="false">No</option>
                 </select>
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="hasACFormControl" class="form-label mb-1">Ψύξη;</label>
+              <label for="hasACFormControl" class="form-label mb-1">AC</label>
               <div class="col-sm-4">
                 <select v-model="property.hasAC" class="form-select" id="hasACFormControl" required>
-                  <option :value="true">Ναι</option>
-                  <option :value="false">Όχι</option>
+                  <option :value="true">Yes</option>
+                  <option :value="false">No</option>
                 </select>
               </div>
             </div>
 
             <div class="mb-2">
-              <label for="petsAllowedFormControl" class="form-label mb-1">Επιτρέπονται τα κατοικίδια;</label>
+              <label for="petsAllowedFormControl" class="form-label mb-1">Pets Allowed</label>
               <div class="col-sm-4">
                 <select v-model="property.petsAllowed" class="form-select" id="petsAllowedFormControl" required>
-                  <option :value="true">Ναι</option>
-                  <option :value="false">Όχι</option>
+                  <option :value="true">Yes</option>
+                  <option :value="false">No</option>
                 </select>
               </div>
             </div>
 
 
-            <button type="submit" class="btn btn-primary btn-lg rounded-3 font-bold">Βρες μου αγοραστή!</button>
+            <button type="submit" class="btn btn-primary btn-lg rounded-3 font-bold">Sumbit</button>
           </form>
 
           <div v-if="showModal" class="modal">
@@ -259,6 +259,27 @@ body, html {
   font-family: 'Roboto', sans-serif;
 }
 
+.property-title {
+  font-size: 4rem;
+  color: #5a0b0b; 
+  margin: 20px 0;
+  position: absolute;
+  top: 90px; 
+  left: 20px;
+  padding-bottom: 0px; /* Μικρό κενό πριν τη γραμμή */
+  width: fit-content; /* Το πλάτος προσαρμόζεται στο περιεχόμενο */
+}
+
+.property-title::after {
+    content: "";
+    display: block;
+    width: 100vw; /* Κάνει τη γραμμή να εκτείνεται σε όλο το πλάτος της σελίδας */
+    border-bottom: 3px double #4a4a4a; /* Διπλή γραμμή */
+    position: absolute;
+    left: 0; /* Ξεκινάει από την αριστερή άκρη */
+    top: 100%; /* Βάζει τη γραμμή ακριβώς κάτω από τον τίτλο */
+}
+
 .modal {
   display: none; 
   position: fixed;
@@ -312,7 +333,7 @@ body, html {
   margin: 0 auto;
   padding: 2rem;
   text-align: left;
-  background-color: #80535A;
+  background-color: #732a2a;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   margin-top: 30px;
@@ -329,7 +350,7 @@ body, html {
 }
 
 .form-control:focus {
-  border-color: #3498db;
+  border-color: #05be62;
   outline: none;
 }
 
@@ -338,7 +359,7 @@ body, html {
   padding: 14px;
   font-size: 16px;
   border-radius: 8px;
-  background: #a86f72;
+  background: #5a0b0b;
   color: #ffffff;
   transition: background 0.3s ease, box-shadow 0.3s;
   border: none;
