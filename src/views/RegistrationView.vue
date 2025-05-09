@@ -75,8 +75,10 @@ const showModal = ref(true);
 const msg = ref('');
 const router = useRouter();
 
+const backendURL = import.meta.env.VITE_BACKEND;
+
 const onFormSubmit = () => {
-  const endpoint = `http://localhost:8080/api/auth/signup`; 
+  const endpoint = `${backendURL}/api/auth/signup`; 
   const userData = {
     username: user.value.username,
     email: user.value.email,

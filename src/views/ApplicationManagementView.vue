@@ -68,8 +68,10 @@ const currentPage = ref(1);
 const showModal = ref(false);
 const modalMessage = ref('');
 
+const backendURL = import.meta.env.VITE_BACKEND;
+
 onMounted(() => {
-  fetch(`http://localhost:8080/api/admin/getNonApprovedProperties`, {
+  fetch(`${backendURL}/api/admin/getNonApprovedProperties`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -92,7 +94,7 @@ onMounted(() => {
 });
 
 const removeProperty = (propertyId) => {
-  fetch(`http://localhost:8080/api/admin/deleteProperty/${propertyId}`, {
+  fetch(`${backendURL}/api/admin/deleteProperty/${propertyId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -113,7 +115,7 @@ const removeProperty = (propertyId) => {
 };
 
 const approveProperty = (propertyId) => {
-  fetch(`http://localhost:8080/api/admin/approveProperty/${propertyId}`, {
+  fetch(`${backendURL}/api/admin/approveProperty/${propertyId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

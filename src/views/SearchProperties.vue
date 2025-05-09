@@ -124,6 +124,8 @@ const errorMessage = ref("");
 const searchType = ref("");
 const queryValue = ref("");
 
+const backendURL = import.meta.env.VITE_BACKEND;
+
 const instance = getCurrentInstance();
 const showModal = ref(false);
 const modalMessage = ref('');
@@ -144,7 +146,7 @@ const closeModal = () => {
 const fetchProperties = () => {
   hasSearched.value = false; // Αρχικοποίηση
 
-  fetch(`http://localhost:8080/api/tenant/showProperties`, {  //only properties without tenant
+  fetch(`${backendURL}/api/tenant/showProperties`, {  //only properties without tenant
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -161,7 +163,7 @@ const fetchProperties = () => {
 };
 
 const makeRentalRequest = (propertyId) => {
-  fetch(`http://localhost:8080/api/tenant/makeRentalRequest/${propertyId}`, {
+  fetch(`${backendURL}/api/tenant/makeRentalRequest/${propertyId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -184,7 +186,7 @@ const makeRentalRequest = (propertyId) => {
 };
 
 const makeViewingRequest = (propertyId) => {
-  fetch(`http://localhost:8080/api/tenant/makeViewingRequest/${propertyId}`, {
+  fetch(`${backendURL}/api/tenant/makeViewingRequest/${propertyId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

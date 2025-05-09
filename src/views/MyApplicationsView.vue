@@ -60,8 +60,10 @@
   const showModal = ref(false);
   const modalMessage = ref('');
   
+  const backendURL = import.meta.env.VITE_BACKEND;
+
   onMounted(() => {
-    fetch(`http://localhost:8080/api/tenant/getMyRequests`, {
+    fetch(`${backendURL}/api/tenant/getMyRequests`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

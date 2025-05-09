@@ -100,6 +100,7 @@ const openModal = (message) => {
   modalMessage.value = message;
   showModal.value = true;
 };
+const backendURL = import.meta.env.VITE_BACKEND;
 
 const closeModal = () => {
   showModal.value = false;
@@ -110,7 +111,7 @@ const closeModal = () => {
 
 const fetchProperties = () => {
 
-  fetch(`http://localhost:8080/api/tenant/showProperties`, {  //only properties without tenant
+  fetch(`${backendURL}/api/tenant/showProperties`, {  //only properties without tenant
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -156,7 +157,7 @@ const prevPage = () => {
 };
 
 const makeRentalRequest = (propertyId) => {
-  fetch(`http://localhost:8080/api/tenant/makeRentalRequest/${propertyId}`, {
+  fetch(`${backendURL}/api/tenant/makeRentalRequest/${propertyId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -179,7 +180,7 @@ const makeRentalRequest = (propertyId) => {
 };
 
 const makeViewingRequest = (propertyId) => {
-  fetch(`http://localhost:8080/api/tenant/makeViewingRequest/${propertyId}`, {
+  fetch(`${backendURL}/api/tenant/makeViewingRequest/${propertyId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

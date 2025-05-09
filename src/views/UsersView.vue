@@ -52,8 +52,10 @@ const currentPage = ref(1);
 const showModal = ref(false);
 const modalMessage = ref('');
 
+const backendURL = import.meta.env.VITE_BACKEND;
+
 onMounted(() => {
-  fetch(`http://localhost:8080/api/admin/getUsersFalse`, {
+  fetch(`${backendURL}/api/admin/getUsersFalse`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -75,7 +77,7 @@ onMounted(() => {
 });
 
 const declineUser = (userId) => {
-  fetch(`http://localhost:8080/api/admin/declineUser/${userId}`, {
+  fetch(`${backendURL}/api/admin/declineUser/${userId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -96,7 +98,7 @@ const declineUser = (userId) => {
 };
 
 const approveUser = (userId) => {
-  fetch(`http://localhost:8080/api/admin/approveUser/${userId}`, {
+  fetch(`${backendURL}/api/admin/approveUser/${userId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

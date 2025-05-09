@@ -50,12 +50,12 @@ const credentials = ref({
 });
 const authenticationFailed = ref(false);
 
-
+const backendURL = import.meta.env.VITE_BACKEND;
 const onFormSubmit = () => {
   loading.value = true;
   authenticationFailed.value = false;
 
-  fetch(`http://localhost:8080/api/auth/signin`, { 
+  fetch(`${backendURL}/api/auth/signin`, { 
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

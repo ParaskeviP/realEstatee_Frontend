@@ -71,6 +71,8 @@ const showModal = ref(false);
 const modalMessage = ref('');
 const hasSearched = ref(false); // Μεταβλητή για να ελέγχουμε αν έγινε αναζήτηση
 
+const backendURL = import.meta.env.VITE_BACKEND;
+
 const openModal = (message) => {
   modalMessage.value = message;
   showModal.value = true;
@@ -89,7 +91,7 @@ onMounted(() => {
 
 const fetchRequests = () => {
   hasSearched.value = false; // Αρχικοποίηση
-  fetch(`http://localhost:8080/api/owner/getRequests`, {
+  fetch(`${backendURL}/api/owner/getRequests`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -134,7 +136,7 @@ const approveRequest = (requestId, isRentalRequest) => {
 };
 
 const approveViewingRequest = (requestId) => {
-  fetch(`http://localhost:8080/api/owner/approveViewingRequest/${requestId}`, {
+  fetch(`${backendURL}/api/owner/approveViewingRequest/${requestId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -158,7 +160,7 @@ const approveViewingRequest = (requestId) => {
 
 
 const approveRentalRequest = (requestId) => {
-  fetch(`http://localhost:8080/api/owner/approveRentalRequest/${requestId}`, {
+  fetch(`${backendURL}/api/owner/approveRentalRequest/${requestId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -179,7 +181,7 @@ const approveRentalRequest = (requestId) => {
 };
 
 const declineRequest = (requestId) => {
-  fetch(`http://localhost:8080/api/owner/deleteRequest/${requestId}`, {
+  fetch(`${backendURL}/api/owner/deleteRequest/${requestId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

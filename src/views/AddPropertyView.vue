@@ -201,8 +201,10 @@ const closeModal = () => {
   showModal.value = false;
 };
 
+const backendURL = import.meta.env.VITE_BACKEND;
+
 const onFormSubmit = () => {
-  fetch('http://localhost:8080/api/owner/newProperty', {
+  fetch(`${backendURL}/api/owner/newProperty`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
