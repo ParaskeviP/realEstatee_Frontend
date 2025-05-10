@@ -22,9 +22,9 @@
                 <span v-else>Viewing</span>
             </td>
             <td>
-                <span v-if="request.isViewingApproved">✔️</span>
-                <span v-if="request.isViewingApproved ===false">✘</span>
-                <span v-else-if="request.isViewingApproved===null">Pending</span>
+              <span v-if="request.isViewingApproved ">✔️</span>
+              <span v-if="request.isRentalRequest===false &&request.isViewingApproved ===false">✘</span>
+                <span v-else-if="request.isViewingApproved===null || (request.isRentalRequest && request.isViewingApproved === false)">Pending</span>
             </td>
           </tr>
           </tbody>
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div v-else>
-        No applications found!
+        <h2>No applications found!</h2>
       </div>
       <div v-if="showModal" class="modal">
         <div class="modal-content success">
@@ -286,5 +286,12 @@ h1::after {
     width: 100vw;
     /* border-bottom: 3px double #4a4a4a; */
     margin-top: 0px;
+}
+
+h2{
+  display: block;
+  margin: 20px 0;
+  position: absolute;
+  left: 20px;
 }
   </style>

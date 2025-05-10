@@ -18,13 +18,12 @@
           <td>{{ request.property.id }}</td>
           <td>{{ request.isRentalRequest ? "Rental" : "Viewing" }}</td>
           <td>
-            {{ request.isViewingApproved === null ? "Pending" : request.isViewingApproved ? "Accepted" : "Rejected" }}
+            {{request.isViewingApproved === null ? "Pending" : request.isViewingApproved === true ? "Accepted"
+            : request.isViewingApproved === false && request.isRentalRequest === true ? "Pending" : "Rejected"}}
           </td>
-
           <td>
-            <!-- Show buttons only if the request is a rental request or if the status is null for viewing requests -->
-            <button v-if=" (request.isViewingApproved ===null && !request.isViewingApproved === true && !request.isViewingApproved === false) || request.isRentalRequest ||( !request.isRentalRequest && request.isViewingApproved === null)" class="btn stylish-btn" @click="approveRequest(request.id, request.isRentalRequest)">
-              Approve
+            <button v-if=" (request.isViewingApproved ===null && !request.isViewingApproved === true && !request.isViewingApproved === false) || request.isRentalRequest ||
+            ( !request.isRentalRequest && request.isViewingApproved === null)" class="btn stylish-btn" @click="approveRequest(request.id, request.isRentalRequest)">Approve
             </button>
 
             <button v-if=" (request.isViewingApproved ===null && !request.isViewingApproved === true && !request.isViewingApproved === false) || request.isRentalRequest ||( !request.isRentalRequest && request.isViewingApproved === null)" class="btn stylish-btn" @click="declineRequest(request.id)">

@@ -354,11 +354,11 @@ properties.value = [];
 <style scoped>
 .filter-box {
   position: fixed;
-  left: 0;
+  left: 10px;
   top: 60%;
   transform: translateY(-50%);
   width: 250px;
-  background: #5a0b0b;
+  background: #5a0b0bb5;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(9, 9, 9, 0.2);
@@ -450,6 +450,7 @@ th {
   background-color: #5a0b0b;
   color: white;
   font-weight: bold;
+  
 }
 
 tr:nth-child(even) {

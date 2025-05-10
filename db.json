@@ -7,20 +7,28 @@
       "role": "ROLE_TENANT"
     },
     {
+      "id": "2", 
+      "username": "george",
+      "password": "123456",
+      "role": "ROLE_TENANT"
+    },
+    {
       "id": "3",
-      "username": "testOwner",
+      "username": "joe",
       "password": "123456",
       "role": "ROLE_OWNER"
     },
     {
-      "id": "d3eb",
-      "username": "admin",
-      "password": "1234"
+      "id": "4",
+      "username": "maria",
+      "password": "123456",
+      "role": "ROLE_OWNER"
     },
     {
-      "id": "a403",
-      "username": "admin",
-      "password": "1234"
+      "id": "5",
+      "username": "ria",
+      "password": "123456",
+      "role": "ROLE_TENANT"
     }
   ]
 }

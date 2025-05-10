@@ -2,7 +2,8 @@
   <div class="overlay dark-text">
     <div class="modal-container">
       <div class="modal-content">
-        <span class="close" @click="closeModalAndGoBack">&times;</span>
+        <!-- Εμφάνιση κουμπιού κλεισίματος μόνο αν δεν είμαστε στη ριζική διαδρομή -->
+        <span v-if="!isRootPath" class="close" @click="closeModalAndGoBack">&times;</span>
         <div class="text-center mb-4">
           <h1 class="fs-3">Sign In</h1>
         </div>
@@ -35,12 +36,15 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useApplicationStore } from '@/stores/application.js';
 
 const router = useRouter();
 const {setUserData, persistUserData, isAuthenticated } = useApplicationStore();
+
+// Προσθήκη του computed property για τον έλεγχο αν βρισκόμαστε στην αρχική σελίδα
+const isRootPath = computed(() => router.currentRoute.value.path === '/' || router.currentRoute.value.path === '');
 
 const showModal = ref(true);
 const loading = ref(false);
@@ -163,13 +167,21 @@ input.form-control:focus {
 button.btn {
   background-color: #815c45;
   color: white;
-  border: none ;
+  border: none;
   padding: 12px 24px;
   font-size: 1.1rem;
   border-radius: 5px;
   cursor: pointer;
   width: 50%;
   transition: background-color 0.3s ease;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 .close:hover {
