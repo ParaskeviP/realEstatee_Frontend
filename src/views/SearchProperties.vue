@@ -319,8 +319,7 @@ properties.value = [];
       if(isFurnishedFilter.value !== undefined) params.append("isFurnished", isFurnishedFilter.value);
 
       console.log(params.toString());
-
-      const filterUrl=`http://${backendURL}/api/properties/search?${params.toString()}`;
+      const filterUrl=`http://135.236.105.170:8080/api/properties/search?${params.toString()}`;
 
       const response = await fetch(
         filterUrl,
