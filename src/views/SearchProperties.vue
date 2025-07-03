@@ -320,7 +320,7 @@ properties.value = [];
 
       console.log(params.toString());
 
-      const filterUrl=`http://localhost:8080/api/properties/search?${params.toString()}`;
+      const filterUrl=`http://${backendURL}/api/properties/search?${params.toString()}`;
 
       const response = await fetch(
         filterUrl,
